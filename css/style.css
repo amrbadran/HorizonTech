@@ -1,6 +1,8 @@
 
 :root{
-    --main-color:rgb(255, 32, 19);
+    --main-color:rgb(255, 35, 25);
+    --second-color:hsl(0, 0%, 9%);
+    --third-color:hsl(0,0%,11%);
 }
 *{
     color:#fff;
@@ -129,9 +131,99 @@ section{
     width: 100%;
     height: 100%;
     z-index: 1;
-    background: rgba(0, 0, 0, .3);
+    background: var(--second-color);
+    opacity: .7;
 }
 
+
+.section-services{
+    padding:25px 0 40px;
+    background:var(--second-color);
+}
+.section-services .col-lg-4 > div{
+    border-radius:15px;
+    border:1px solid var(--main-color);
+    padding:30px;
+    margin:15px 12px;
+    height:90%;
+    transition: all .5s;
+}
+.section-services .col-lg-4 > div i{
+    font-size:2rem;
+    margin-top:5px;
+    color:var(--main-color);
+    transition: all .5s;
+}
+.section-services .col-lg-4 > div h3{
+    padding:15px 0 10px;
+    width:100%;
+    font-size:1.6rem;
+
+}
+.section-services .col-lg-4 > div p,.section-why-choose-us .col-lg-6  > div:last-child p{
+    font-size:14px;
+    color:#ddd;
+    letter-spacing: 1px;
+    line-height:1.6;
+    transition: all .5s;
+
+}
+.section-services .col-lg-4 > div:hover{
+    background: var(--main-color);
+}
+.section-services .col-lg-4 > div:hover i,.section-services .col-lg-4 > div:hover p{
+    color:#fff;
+}
+
+.section-why-choose-us{
+    padding:25px 0 40px;
+    background: var(--third-color);
+}
+.section-why-choose-us h1{
+    margin-bottom:30px;
+}
+.section-why-choose-us .col-lg-6 {
+    display:flex;
+    padding:30px 0;
+}
+.section-why-choose-us .col-lg-6:nth-child(even){
+    padding-left:40px;
+}
+.section-why-choose-us .col-lg-6:nth-child(odd){
+    padding-right:20px;
+    border-right:1px solid #ddd;
+}
+.section-why-choose-us .col-lg-6  > div:first-child{
+    width:18%;
+}
+.section-why-choose-us .col-lg-6  > div:last-child{
+    width:88%;
+    text-align: left;
+    padding:0 10px;
+}
+.section-why-choose-us .col-lg-6 > div:first-child h3{
+    background: var(--main-color);
+    text-align: center;
+    width:90%;
+    padding:28px;
+    border-radius: 50%;
+    box-shadow: 1px 1px 15px var(--main-color);
+    transition: transform .3s linear;
+}
+.section-why-choose-us .col-lg-6 > div:first-child h3:hover{
+    transform:rotate(360deg);
+
+}
+.section-brands{
+    background: var(--second-color);
+}
+.section-brands img{
+    transition: all .3s;
+    cursor:pointer;
+}
+.section-brands img:hover{
+    transform: perspective(200px) translateZ(20px);
+}
 @media (max-width: 768px)  {
     .section-wlc .container .col-lg-6{
         text-align: center;
@@ -144,5 +236,35 @@ section{
     }
     .landing-header .navbar-collapse li{
         padding:5px 0;
+    }
+    .section-brands .col-md-3{
+        text-align: center;
+        margin-bottom:20px;
+    }
+
+}
+@media (max-width:992px){
+    .section-why-choose-us .col-lg-6{
+        display:block;
+    }
+    .section-why-choose-us .col-lg-6 > div:first-child{
+        width:100%;
+    }
+    .section-why-choose-us .col-lg-6 > div:last-child{
+        width:100%;
+    }
+    .section-why-choose-us .col-lg-6 > div:first-child h3{
+        width:18%;
+        margin:0 auto 15px;
+
+    }
+    .section-why-choose-us .col-lg-6{
+        margin:15px 0;
+        border:none !important;
+        padding-left:0 !important;
+
+    }
+    .section-why-choose-us .col-lg-6 div h4,.section-why-choose-us .col-lg-6 div p{
+        text-align: center;
     }
 }
