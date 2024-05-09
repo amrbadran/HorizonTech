@@ -6,10 +6,33 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
+
     <title>Title</title>
 </head>
 <body>
+    <header class="landing-header fixed-top">
+        <nav class="navbar align-items-center navbar-expand-md ">
+            <div class="container">
+                <a href="" class="navbar-brand">HorizonTech</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="collapseNav">
+                    <ul class="navbar-nav  ms-auto">
+                        <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
+                        <li class="navbar-item"><a href="#" class="navbar-link">Services</a></li>
+                        <li class="navbar-item"><a href="#" class="navbar-link">Shop</a></li>
+                        <li class="navbar-item"><a href="#" class="navbar-link">Contact</a></li>
+                        <li class="navbar-item ms-md-5 shopping-cart-icon"><a href="#" class="navbar-link"><i class="fa fa-shopping-cart">
+                            <span>0</span>
+                        </i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
     <section id="section-wlc" class="section-wlc carousel slide" data-bs-ride="carousel">
+        <div class="overlay"></div>
         <div class="carousel-indicators">
             <button type="button" data-bs-target="#section-wlc" data-bs-slide-to="0" class="active"></button>
             <button type="button" data-bs-target="#section-wlc" data-bs-slide-to="1"></button>
@@ -19,27 +42,11 @@
             <div class="carousel-item one active"></div>
             <div class="carousel-item two"></div>
             <div class="carousel-item three"></div>
-            <nav class="navbar navbar-expand-sm">
-               <div class="container">
-                   <a href="javascript:void(0)" class="navbar-brand">HorizonTech</a>
-                   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav">
-                       <i class="fa fa-bars" aria-hidden="true"></i>
-                   </button>
-                   <div class="collapse navbar-collapse" id="collapseNav">
-                       <ul class="navbar-nav ms-auto">
-                           <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
-                           <li class="navbar-item"><a href="#" class="navbar-link">Services</a></li>
-                           <li class="navbar-item"><a href="#" class="navbar-link">Shop</a></li>
-                           <li class="navbar-item"><a href="#" class="navbar-link">Contact</a></li>
-                           <li class="navbar-item ms-md-4"><a href="#" class="navbar-link"><i class="fa fa-shopping-cart"></i></a></li>
-                       </ul>
-                   </div>
-               </div>
-            </nav>
-            <div class="container h-100">
+
+            <div class="container">
                 <div class="row">
-                    <div class="col-md-6">
-                        <h1>Empowering Your Tech Evolution, Every Step of the Way</h1>
+                    <div class="col-lg-6">
+                        <h1>Empowering Your <span class="main-color">Tech Evolution</span> Every Step of the Way</h1>
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
                         </p>
@@ -88,6 +95,232 @@
             </div>
         </div>
     </section>
+    <section class="section-why-choose-us">
+        <div class="container">
+            <h1 class="text-center">Why Choose Us</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class=""><i class="fa fa-lightbulb-o"></i></div>
+                    <div>
+                        <h4>Quality Products </h4>
+                        <p>Our computer store is committed to providing only the highest quality products to our customers. From top-of-the-line laptops and desktops to cutting-edge peripherals and components</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div><i class="fa fa-sitemap"></i></div>
+                    <h4>Variety and Selection</h4>
+                    <p>At our computer store, we understand that every customer has unique needs and preferences. That's why we offer a diverse selection of products to suit every taste and budget.</p>
+                </div>
+                <div class="col-md-6">
+                    <div><i class="fa fa-money"></i></div>
+                    <h4>Competitive Pricing</h4>
+                    <p>At our computer store, we believe that quality technology should be accessible to everyone. That's why we work hard to offer competitive pricing on all of our products.</p>
+                </div>
+                <div class="col-md-6">
+                    <div><i class="fa fa-gift"></i></div>
+                    <h4>Special Offers</h4>
+                    <p>Looking for a great deal? You've come to the right place! Our computer store is always running special offers and promotions to help you save on your favorite tech products.</p>
+                </div>
+                <div class="col-md-6">
+                    <div><i class="fa fa-clock-o"></i></div>
+                    <h4>Timely delivery</h4>
+                    <p>Timely delivery is our commitment to you when you shop with us. We understand that waiting for your new tech gear can be both exciting and nerve-wracking, which is why we prioritize fast and reliable shipping.</p>
+                </div>
+                <div class="col-md-6">
+                    <div><i class="fa fa-life-ring"></i></div>
+                    <h4>Expertise and Support</h4>
+                    <p>When you shop with us, you're not just buying a product — you're gaining a trusted partner in your technology journey. Our team of experts is passionate about all things tech and is dedicated to providing unparalleled support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Of Why Choose Us -->
+    <section class="section-brands bg-dark pt-4 pb-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="./images/intel.png" width="50%" height="90%" alt="">
+                </div>
+                <div class="col-md-3">
+                    <img src="./images/amd.png" width="50%" height="100%" alt="">
+                </div>
+                <div class="col-md-3">
+                    <img src="./images/geforce.png" width="50%" height="80%" alt="">
+                </div>
+                <div class="col-md-3">
+                    <img src="./images/micron.png" width="50%" height="100%" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Section Brands -->
+    <section class="section-products">
+        <div class="container">
+            <h1>Our Products</h1>
+            <ul class="nav">
+                <li><a href="">Keyboards</a></li>
+                <li><a href="">Screens</a></li>
+                <li><a href="">GPUs</a></li>
+                <li><a href="">Memory</a></li>
+            </ul>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/3.jpg" width="100%" height="100%" alt="">
+                    </div>
+                    <div>aasdasdasd</div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/2.jpg" width="100%" height="100%" alt="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/4.webp" width="100%" height="100%" alt="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/2.jpg" width="100%" height="100%" alt="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/4.webp" width="100%" height="100%" alt="">
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="w-75 h-100" width="80" height="80">
+                        <img src="./images/keyboards/3.jpg" width="100%" height="100%" alt="">
+                    </div>
+                </div>
+            </div>
+            <button><a href="">See More</a></button>
+        </div>
+    </section>
+    <!-- End of Section Products -->
+
+    <section class="section-stats bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <i class="fa fa-user"></i>
+                    <h4>Customers Bought</h4>
+                    <p>2500</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-product-hunt"></i>
+                    <h4>Products Owns</h4>
+                    <p>4400</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-shopping-cart"></i>
+                    <h4>Suppliers Have</h4>
+                    <p>6700</p>
+                </div>
+                <div class="col-md-3">
+                    <i class="fa fa-clock-o"></i>
+                    <h4>Hours Support</h4>
+                    <p>8400</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Section stats-->
+    <section class="contact">
+        <div class="container">
+            <h1 class="text-center">Contact Us</h1>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="contact-box float-md-start">
+                        <i class="fa fa-phone"></i>
+                        <p>
+                            <span>Phone</span><br>
+                            059-5616-428
+                        </p>
+                    </div>
+                    <div class="contact-box float-md-start">
+                        <i class="fa fa-address-book"></i>
+                        <p>
+                            <span>Address</span><br>
+                            Nablus, Rafidia
+                        </p>
+                    </div>
+                    <div style="clear:both;"></div>
+                    <div class="contact-box float-md-start">
+                        <i class="fa fa-send"></i>
+                        <p>
+                            <span>Email</span><br>
+                            badran.amr2003@gmail.com
+                        </p>
+                    </div>
+                    <div class="contact-box float-md-start">
+                        <i class="fa fa-clock-o"></i>
+                        <p>
+                            <span>Open Hours</span><br>
+                            8 AM - 5 PM
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <form action="">
+                        <div class="form-group d-flex">
+                            <input type="text" placeholder="Name" class="form-control w-50">
+                            <input type="email" placeholder="Email" class="form-control w-50">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="" placeholder="Message" id="" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                        <button>Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End of Section Contact-us-->
+    <section class="section-footer bg-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h3>HorizonTech</h3>
+                    <p>
+                        A computer store offers a wide range of hardware, software, and accessories catering to diverse computing needs. From cutting-edge laptops and desktops to peripherals like monitors, keyboards, and printers.</p>
+                </div>
+                <div class="col-md-3">
+                    <h3>Short Links</h3>
+                    <div class="footer-links"><a href="">Home</a></div>
+                    <div class="footer-links"><a href="">Contact</a></div>
+                    <div class="footer-links"><a href="">Shop</a></div>
+                    <div class="footer-links"><a href="">Services</a></div>
+                </div>
+                <div class="col-md-3">
+                    <h3>Follow Us</h3>
+                    <p>We maintain several social media accounts where you can stay connected with us. Feel free to follow us on any of the following platforms to stay updated with our latest news, offers, and products.</p>
+                    <div class="footer-social-icons">
+                        <i class="fa fa-facebook"></i>
+                        <i class="fa fa-twitter"></i>
+                        <i class="fa fa-linkedin"></i>
+                        <i class="fa fa-instagram"></i>
+
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe to our newsletter, and you'll receive continuous updates and messages from us. </p>
+                    <form action="" class="d-flex">
+                        <input type="text" placeholder="Your Email" class="">
+                        <button>Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+<script src="./js/script.js"></script>
 <script src="./js/bootstrap.js"></script>
 </body>
 </html>
