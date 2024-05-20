@@ -6,11 +6,14 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/bootstrap.css">
     <link rel="stylesheet" href="../css/font-awesome.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
     <title>Shop</title>
 </head>
 <body>
     <header class="landing-header sticky-top">
-        <nav class="navbar align-items-center navbar-expand-lg ">
+        <nav class="navbar align-items-center navbar-expand-lg navbar-sticky-bg">
             <div class="container">
                 <a href="" class="navbar-brand">HorizonTech</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav">
@@ -43,14 +46,20 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10">
-                    <div>
-                        <span>Showing 1-9 of 15 Results</span>
-                        <select class='float-end' name="" id="">
-                            <option value="Sort By Latest">Sort By Latest</option>
-                            <option value="Sort By Low to High Price">Sort By Low to High Price</option>
-                            <option value="Sort By High to Low Price">Sort By High to Low Price</option>
-                            <option value="Sort By Rating">Sort By Rating</option>
-                        </select>
+                    <div class="products-title-dropdown">
+                        <span class="">Showing 1-9 of 15 Results</span>
+                        <form action="" class="float-lg-end mt-lg-0 mt-sm-3">
+                            <select class='w-lg-100 ' name="" id="">
+                                <option value="Sort By Latest">Sort By Latest</option>
+                                <option value="Sort By Low to High Price">Sort By Low to High Price</option>
+                                <option value="Sort By High to Low Price">Sort By High to Low Price</option>
+                                <option value="Sort By Rating">Sort By Rating</option>
+
+
+                            </select>
+
+                        </form>
+
                     </div>
                     <div class="row w-100">
                         <div class="col-lg-4">
@@ -73,7 +82,7 @@
                         </div>
                         <div class="col-lg-4">
                             <div class="card-shop-product text-center">
-                                <img src="../images/keyboards/2.jpg" class="w-100" alt="" class="">
+                                <img src="../images/keyboards/3.jpg" class="w-100" alt="" class="">
                                 <h3>Gaming Keyboard</h3>
                                 <p>29.99$</p>
                                 <div class="product-icons" align="center">
@@ -229,16 +238,19 @@
                 </div>
                 <div class="col-lg-2">
                     <div class="product-search">
-                        <input type="text" placeholder="Search...">
+                        <input type="text" class="w-lg-100" placeholder="Search...">
                     </div>
-                    <div class="filter-price">
-                        <h4>Filter By Price</h4>
-                        <input type="range" min="1" max="100" value="50" ><br>
-                        <input type="button" value="Filter">
+                    <div class="filter-price text-center">
+                        <h4 class="text-start">Filter By Price</h4>
+                        <input class='range-slider' type="range" min="1" max="100" value="50" ><br>
+                        <div class="text-end position-relative">
+                            <span class="position-absolute">20$</span>
+                            <input type="button" value="Filter">
+                        </div>
                     </div>
                     <div class="product-cats">
-                        <h4>Product Categories</h4>
-                        <ul>
+                        <h4>Categories</h4>
+                        <ul class="list-unstyled">
                             <li><a href="">KeyBoards</a></li>
                             <li><a href="">Mouses</a></li>
                             <li><a href="">PCs</a></li>
@@ -252,28 +264,28 @@
                     <div class="latest-products">
                         <h4>Latest Products</h4>
                         <div class="latest-product">
-                            <img src="../images/keyboards/3.jpg" width="50" class="float-end" alt="">
-                            <h5>KeyBoard 1</h5>
+                            <a href="javascript:void(0);"><img src="../images/keyboards/3.jpg" width="50" class="float-end" alt=""></a>
+                            <h5><a href="javascript:void(0);">KeyBoard 1</a></h5>
                             <p>29.99$</p>
                         </div>
                         <div class="latest-product">
-                            <img src="../images/keyboards/3.jpg" width="50" class="float-end" alt="">
-                            <h5>KeyBoard 1</h5>
+                            <a href="javascript:void(0);"><img src="../images/keyboards/3.jpg" width="50" class="float-end" alt=""></a>
+                            <h5><a href="javascript:void(0);">KeyBoard 1</a></h5>
                             <p>29.99$</p>
                         </div>
                         <div class="latest-product">
-                            <img src="../images/keyboards/3.jpg" width="50" class="float-end" alt="">
-                            <h5>KeyBoard 1</h5>
+                            <a href="javascript:void(0);"><img src="../images/keyboards/3.jpg" width="50" class="float-end" alt=""></a>
+                            <h5><a href="javascript:void(0);">KeyBoard 1</a></h5>
                             <p>29.99$</p>
                         </div>
                         <div class="latest-product">
-                            <img src="../images/keyboards/3.jpg" width="50" class="float-end" alt="">
-                            <h5>KeyBoard 1</h5>
+                            <a href="javascript:void(0);"><img src="../images/keyboards/3.jpg" width="50" class="float-end" alt=""></a>
+                            <h5><a href="javascript:void(0);">KeyBoard 1</a></h5>
                             <p>29.99$</p>
                         </div>
                         <div class="latest-product">
-                            <img src="../images/keyboards/3.jpg" width="50" class="float-end" alt="">
-                            <h5>KeyBoard 1</h5>
+                            <a href="javascript:void(0);"><img src="../images/keyboards/3.jpg" width="50" class="float-end" alt=""></a>
+                            <h5><a href="javascript:void(0);">KeyBoard 1</a></h5>
                             <p>29.99$</p>
                         </div>
                     </div>
