@@ -454,6 +454,12 @@ section{
     .section-products .container .nav li{
         margin-bottom: 10px;
     }
+    .product-page form button{
+        margin:10px;
+    }
+    .product-page form button:last-child{
+        margin:0;
+    }
 }
 .section-footer form input{
     box-shadow:none;
