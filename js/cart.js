@@ -17,7 +17,9 @@ trashIcons.forEach((icon)=>{
     icon.onclick = () => {
         let parentIcon = icon.parentElement.parentElement;
         let allProductInCart = document.querySelectorAll('.product-in-cart');
-        parentIcon.remove();
+        parentIcon.classList.add('fade-out');
+        parentIcon.ontransitionend = () => {parentIcon.remove();}
+
         noItemsCart.innerText = noItemsCart.innerText - 1;
         let priceItem = parentIcon.children[3].innerText;
         priceItem = priceItem.trim();
