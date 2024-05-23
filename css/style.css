@@ -77,13 +77,12 @@ section{
     }
 }
 @media (max-width:992px){
-    .section-why-choose-us .col-lg-6{
-        display:block;
-    }
     .section-why-choose-us .col-lg-6 > div:first-child{
-        width:100%;
+        width:85px !important;
+        margin:auto;
     }
     .section-why-choose-us .col-lg-6 > div:last-child{
+        margin:auto;
         width:100%;
     }
     .section-why-choose-us .col-lg-6 > div:first-child h3{
@@ -95,13 +94,14 @@ section{
         margin:15px 0;
         border:none !important;
         padding-left:0 !important;
+        display:block !important;
 
     }
     .section-why-choose-us .col-lg-6 div h4,.section-why-choose-us .col-lg-6 div p{
         text-align: center;
     }
     .section-contact .contact-box{
-        margin:auto;
+        margin:auto !important;
         width:100%;
     }
     .section-footer .col-lg-3{
@@ -110,6 +110,14 @@ section{
     .w-lg-100{
         width:100% !important;
     }
+    .section-products .col-lg-4{
+        display: flex;
+        justify-content: center;
+    }
+    .section-products .col-lg-4 .product-overlay{
+        left:auto !important;
+    }
+
 
 }
 .main-color{
