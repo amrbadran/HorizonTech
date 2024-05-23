@@ -10,6 +10,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <body>
     <header class="landing-header sticky-top">
@@ -44,7 +46,7 @@
 
     <section class="shopping-cart-page pb-5">
         <div class="container">
-            <h6 style="">There are 9 Items in Your Cart</h6>
+            <h6 style="">There are <span id="no-items-in-cart">3</span> Items in Your Cart</h6>
             <div class="row">
                 <div class="col-lg-9">
 
@@ -104,14 +106,14 @@
                     <div>
                         <h4>Summary</h4>
                         <p class="mt-2 mb-3">
-                            <span >Subtotal</span> <span >$20.00</span>
+                            <span >Subtotal</span> <span id="shopping-cart-subtotal">$60.00</span>
                         </p>
 
                         <p class="mt-2 mb-3">
                             <span >Taxes</span> <span >$3.00</span>
                         </p>
                         <p class='mt-1 pt-3 fw-bold' style="border-top:1px solid #343434;">
-                            <span >Total</span> <span >$23.00</span>
+                            <span >Total</span> <span id="shopping-cart-total">$63.00</span>
                         </p>
                         <div class="button-checkout">
                             <button class="w-100">Check out</button>
@@ -162,6 +164,5 @@
     </section>
     <script src="../js/cart.js"></script>
     <script src="../js/bootstrap.js"></script>
-
 </body>
 </html>

@@ -969,8 +969,10 @@ section{
     margin-bottom:20px;
     border-radius:10px;
     box-shadow:3px 3px 10px #111;
-
+    transition: bottom .3s ease;
+    bottom:0;
 }
+
 .shopping-cart-page .product-in-cart img{
     border-radius:3px;
 }
