@@ -413,7 +413,7 @@ table tbody tr {
     color: #777;
 }
 
-.actions span {
+.actions i {
     display: inline-block;
     font-size: 1.5rem;
     margin-right: .5rem;
@@ -433,6 +433,9 @@ table tbody tr {
 
 @media only screen and (max-width: 768px) {
 
+    input{
+        width: 100%;
+    }
     .sidebar {
         left: -165px;
         z-index: 90;
@@ -525,13 +528,13 @@ input[type="file"] {
     display: none;
 }
 
-label{
+.label5{
     display: inline-block;
     color:#fff;
     background: var(--main-color);
     text-align: center;
+    font-size: 14px;
     padding: 15px 40px;
-    font-size: 18px;
     letter-spacing: 1.5px;
     user-select:none ;
     cursor: pointer;
@@ -541,4 +544,23 @@ label{
 
 label:active{
     transform: scale(0.9);
+}
+
+.uploadfile{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th{
+    color:#fff !important;
+}
+
+td{
+    color:#bbb !important;
+}
+
+#addProductbtn{
+    display: none;
 }
