@@ -37,7 +37,7 @@ body {
     bottom: 0;
     top: 0;
     z-index: 100;
-    background: var(--color-dark);
+    background: var(--second-color);
     transition: left 300ms;
 }
 
