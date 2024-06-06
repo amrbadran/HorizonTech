@@ -37,7 +37,7 @@ body {
     bottom: 0;
     top: 0;
     z-index: 100;
-    background: var(--color-dark);
+    background: var(--second-color);
     transition: left 300ms;
 }
 
@@ -120,9 +120,14 @@ body {
     text-align: center;
 }
 
+
 .side-menu a {
     display: block;
     padding: 1.2rem 0rem;
+}
+
+.side-menu ul li {
+    margin: 10px 0;
 }
 
 .side-menu a.active {
@@ -184,13 +189,14 @@ header {
     z-index: 100;
     height: 60px;
     box-shadow: 0px 5px 5px -5px rgb(0 0 0 /10%);
-    background: var(--second-color);
+    background: #fff;
     transition: left 300ms;
 }
 
 .header-content, .header-menu {
     display: flex;
     align-items: center;
+    background-color: var(--second-color);
 }
 
 .header-content {
@@ -257,11 +263,12 @@ header {
 
 main {
     margin-top: 60px;
+    background: var(--second-color);
 }
 
 .page-header {
     padding: 1.3rem 1rem;
-    background: var(--second-color);
+    background: var(--main-color);
     border-bottom: 1px solid #dee2e8;
 }
 
@@ -271,6 +278,10 @@ main {
 
 .page-content {
     padding: 1.3rem 1rem;
+    background: var(--second-color);
+}
+
+th {
     background: var(--main-color);
 }
 
@@ -282,79 +293,10 @@ main {
     margin-bottom: 2rem;
 }
 
-.card {
-    box-shadow: 0px 5px 5px -5px rgb(0 0 0 / 10%);
-    background: var(--fourth-color);
-    padding: 1rem;
-    border-radius: 3px;
-}
-
-.card-head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.card-head h2 {
-    color: #fff;
-    font-size: 1.8rem;
-    font-weight: 500;
-}
-
-.card-head span {
-    font-size: 3.2rem;
-    color:#fff;
-}
-
-.card-progress small {
-    color: #ddd;
-    font-size: .8rem;
-    font-weight: 600;
-}
-
-.card-indicator {
-    margin: .7rem 0rem;
-    height: 10px;
-    border-radius: 4px;
-    background: #e9edf2;
-    overflow: hidden;
-}
-
-.indicator {
-    height: 10px;
-    border-radius: 4px;
-}
-
-.indicator.one {
-    background: #22baa0;
-}
-
-.indicator.two {
-    background: #11a8c3;
-}
-
-.indicator.three {
-    background: #f6d433;
-}
-
-.indicator.four {
-    background: #f25656;
-}
-
 .records {
     box-shadow: 0px 5px 5px -5px rgb(0 0 0 / 10%);
-    background: green;
+    background: #fff;
     border-radius: 3px;
-    height: 100%;
-}
-
-canvas{
-    display: block;
-}
-#chart-container{
-    width: 100%;
-    height: 90%;
-    background: var(--second-color);
 }
 
 .record-header {
@@ -470,7 +412,7 @@ table tbody tr {
     color: #777;
 }
 
-.actions span {
+.actions i {
     display: inline-block;
     font-size: 1.5rem;
     margin-right: .5rem;
@@ -487,17 +429,12 @@ table tbody tr {
     font-size: .8rem;
 }
 
-@media only screen and (max-width: 1200px) {
-    .analytics {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 @media only screen and (max-width: 768px) {
-    .analytics {
-        grid-template-columns: 100%;
-    }
 
+    input{
+        width: 100%;
+    }
     .sidebar {
         left: -165px;
         z-index: 90;
@@ -542,3 +479,88 @@ table tbody tr {
         width: 900px;
     }
 }
+
+.form-controler {
+
+    display: grid;
+    gap: 3px;
+}
+
+.form-control {
+    border: 1px solid #fff;
+    color: #ddd;
+    background: var(--fourth-color);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 4px;
+    outline: none;
+}
+
+.form-control::placeholder {
+    color: #fff;
+}
+
+
+.section-contact {
+    background-color: var(--second-color);
+    margin: 15px;
+}
+
+
+.headed {
+    background: var(--second-color);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--fourth-color);
+}
+
+tr:nth-child(even) {
+    background-color: var(--second-color);
+}
+
+input[type="file"] {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    display: none;
+}
+
+.label5{
+    display: inline-block;
+    color:#fff;
+    background: var(--main-color);
+    text-align: center;
+    font-size: 14px;
+    padding: 15px 40px;
+    letter-spacing: 1.5px;
+    user-select:none ;
+    cursor: pointer;
+    box-shadow: 5px 15px 25px var(--main-color-low-opacity);
+    border-radius: 3px;
+}
+
+label:active{
+    transform: scale(0.9);
+}
+
+.uploadfile{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+th{
+    color:#fff !important;
+}
+
+td{
+    color:#bbb !important;
+}
+
+#addProductbtn{
+    display: none;
+}
+
