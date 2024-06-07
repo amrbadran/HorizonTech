@@ -63,7 +63,7 @@ $('#login-up').on('submit', function(e) {
     }
 
     $.ajax({
-        url: 'php/ajax/ajax_sign_up.php',
+        url: './php/ajax/ajax_sign_up.php',
         type: 'POST',
         data: {
             firstName: firstName,
@@ -73,14 +73,37 @@ $('#login-up').on('submit', function(e) {
         },
         success: function(response) {
             if (response == 'success') {
-                // Redirect to login page or another page
-                window.location.href = 'login.html';
+                $('#error').css('color', 'green');
+                $('#error').text("Your Account has been created");
+                window.location.href = 'login.php';
             } else {
+
+                console.log(response);
                 $('#error').text(response);
             }
         }
     })
 })
+
+    $('#login-in').on('submit',function(e) {
+        e.preventDefault();
+        var username = $('#usernameL').val();
+        var password = $('#passwordL').val();
+
+        $.ajax({
+            url: './php/ajax/ajax_sign_in.php',
+            type: 'POST',
+            data: {username: username, password: password},
+            success: function(response) {
+                if (response == 'success') {
+                    window.location.href = 'index.php';
+                } else {
+                    console.log(response);
+                    $('#error-message').text('Invalid username or password');
+                }
+            }
+        });
+    });
 });
 
 

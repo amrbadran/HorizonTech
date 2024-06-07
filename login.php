@@ -1,4 +1,13 @@
-<!doctype html>
+<?php
+    session_start();
+    if(isset($_SESSION['username'])){
+
+        header("Location: index.php");
+        exit();
+    }
+
+?>
+<!Doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,7 +31,7 @@
         </div>
 
         <div class="login__forms">
-            <form action="" class="login__registre" id="login-in">
+            <form class="login__registre" id="login-in">
                 <h1 class="login__title">Sign In</h1>
 
                 <div class="login__box">
@@ -34,8 +43,8 @@
                     <i class="fa fa-lock" aria-hidden="true"></i>
                     <input id="passwordL" type="password" placeholder="Password" class="login__input">
                 </div>
-
-                <a href="#" class="login__button">Sign In</a>
+                <label id="error-message"></label>
+               <button type="submit" class="login__button">Sign In</button>
 
                 <div>
                     <span class="login__account">Don't have an Account ?</span>
@@ -63,8 +72,8 @@
                     <i class="fa fa-lock" aria-hidden="true"></i>
                     <input id="password" type="password" placeholder="Password" class="login__input">
                 </div>
-                <label id="error">There is username with that name</label>
-                <a href="javascript:void(0);" class="login__button" id="signUpButton">Sign Up</a>
+                <label id="error"></label>
+                <button class="login__button" id="signUpButton">Sign Up</button>
 
                 <div>
                     <span class="login__account">Already have an Account ?</span>

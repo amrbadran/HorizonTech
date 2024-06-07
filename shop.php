@@ -20,7 +20,6 @@
                         <?php include('php/functions/shop_show_products.php');?>
                         <?php
 
-
                             show_products();
 
                         ?>
