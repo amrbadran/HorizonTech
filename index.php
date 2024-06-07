@@ -1,48 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <link rel="stylesheet" href="./css/font-awesome.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
-    <title>Title</title>
-    <style>
-
-
-        .carousel-item{
-            transition: transform .6s ease-in-out !important;
-        }
-        .carousel-indicators [data-bs-target]{
-            transition: opacity .6s ease !important;
-        }
-    </style>
-</head>
-<body>
-    <header class="landing-header fixed-top">
-        <nav class="navbar align-items-center navbar-expand-lg ">
-            <div class="container">
-                <a href="" class="navbar-brand">HorizonTech</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNav">
-                    <i class="fa fa-bars" aria-hidden="true"></i>
-                </button>
-                <div class="collapse navbar-collapse" id="collapseNav">
-                    <ul class="navbar-nav  ms-auto">
-                        <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
-                        <li class="navbar-item"><a href="#section-services" class="navbar-link">Services</a></li>
-                        <li class="navbar-item"><a href="#section-products" class="navbar-link">Shop</a></li>
-                        <li class="navbar-item"><a href="#section-contact" class="navbar-link">Contact</a></li>
-                        <li class="navbar-item ms-md-5 shopping-cart-icon"><a href="#" class="navbar-link"><i class="fa fa-shopping-cart">
-                            <span>0</span>
-                        </i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <?php include('php/header.php'); ?>
 
     <section id="section-wlc" class="section-wlc carousel slide" data-bs-ride="carousel">
         <div class="overlay"></div>
@@ -225,7 +181,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/4.webp" width="100%" height="100%" alt="">
+                        <img src="images/keyboards/4.webp" width="100%" height="100%" alt="">
                     </div>
                     <div class="product-overlay">
                         <h5>Keyboard 1</h5>
@@ -235,7 +191,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/2.jpg" width="100%" height="100%" alt="">
+                        <img src="images/keyboards/2.jpg" width="100%" height="100%" alt="">
                     </div>
                     <div class="product-overlay">
                         <h5>Keyboard 1</h5>
@@ -264,7 +220,7 @@
                     </div>
                 </div>
             </div>
-            <button class="mt-4"><a href="php/shop.html" height="100">See More</a></button>
+            <button class="mt-4"><a href="shop.php" height="100">See More</a></button>
         </div>
     </section>
     <!-- End of Section Products -->
@@ -352,46 +308,13 @@
         </div>
     </section>
     <!-- End of Section Contact-us-->
-    <section class="section-footer pt-4 pb-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 text-center">
-                    <h3>HorizonTech</h3>
-                    <p>
-                        A computer store offers a wide range of hardware, software, and accessories catering to diverse computing needs. From cutting-edge laptops and desktops to peripherals like monitors, keyboards, and printers.</p>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <h3 class="text-center">Short Links</h3>
-                    <div class="footer-links"><a href="">Home</a></div>
-                    <div class="footer-links"><a href="">Contact</a></div>
-                    <div class="footer-links"><a href="">Shop</a></div>
-                    <div class="footer-links"><a href="">Services</a></div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <h3>Follow Us</h3>
-                    <p>We maintain several social media accounts where you can stay connected with us. Feel free to follow us on any of the following platforms to stay updated.</p>
-                    <div class="footer-social-icons ">
-                        <a href=""><i class="fa fa-facebook"></i></a>
-                        <a href=""><i class="fa fa-twitter"></i></a>
-                        <a href=""><i class="fa fa-linkedin"></i></a>
-                        <a href=""><i class="fa fa-instagram"></i></a>
-
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 text-center">
-                    <h3>Newsletter</h3>
-                    <p>Subscribe to our newsletter, and you'll receive continuous updates and messages from us. </p>
-                    <form action="" class="d-flex justify-content-center">
-                        <input type="text" placeholder="Your Email" class="">
-                        <button><i class="fa fa-arrow-right"></i></button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
+   <?php include('php/footer.php'); ?>
     <script src="js/particles.js"></script>
     <script src="js/app.js"></script>
-<script src="./js/script.js"></script>
+    <script src="./js/script.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</body>
-</html>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    </body>
+    </html>

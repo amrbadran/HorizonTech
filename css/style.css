@@ -647,6 +647,7 @@ section{
     position: relative;
     transition: transform .2s linear;
     border:1px solid transparent;
+    height:443px;
 }
 .card-shop-product:hover{
     border-color:var(--main-color);
@@ -657,8 +658,14 @@ section{
     border-top-left-radius:20px;
     border-top-right-radius: 20px;
     max-width: 100% !important;
-    height:auto;
+    height:55%;
 
+}
+@media(max-width: 780px){
+    .card-shop-product img,.card-shop-product{
+        height: auto !important;
+
+    }
 }
 .card-shop-product img:hover{
     perspective: 200px;
