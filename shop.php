@@ -52,7 +52,7 @@
                                         <p><?php  echo number_format($row['price'],2) . '$'; ?></p>
                                         <div class="product-icons" align="center">
                                             <i class="fa fa-cart-plus"></i>
-                                            <i class="fa fa-eye"></i>
+                                            <a href="product.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a>
                                         </div>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
