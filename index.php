@@ -152,74 +152,40 @@
         <div class="container text-center">
             <h1 class="text-center">Our Products</h1>
             <ul class="nav">
-                <li class="active"><a href="">Keyboards</a></li>
-                <li><a href="">Screens</a></li>
-                <li><a href="">GPUs</a></li>
-                <li><a href="">Memory</a></li>
-            </ul>
-            <div class="row">
+                <?php include('php/functions/shop_show_cats.php') ?>
+                <?php
+                    $result = get_cats_lp();
+                    $array_cats = array();
+                    while($row = $result->fetch_assoc()){
+                        ?>
+                            <li id="cat1"><a href="javascript:void(0);"><?php echo $row['name']; ?></a></li>
+                        <?php
 
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/3.jpg" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/2.jpg" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="images/keyboards/4.webp" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="images/keyboards/2.jpg" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/4.webp" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="w-75 h-100" width="80" height="80">
-                        <img src="./images/keyboards/3.jpg" width="100%" height="100%" alt="">
-                    </div>
-                    <div class="product-overlay">
-                        <h5>Keyboard 1</h5>
-                        <p>14.99$</p>
-                        <a href="">Go to Product</a>
-                    </div>
-                </div>
-            </div>
+                        array_push($array_cats,$row['id']);
+
+                    }
+
+                ?>
+
+            </ul>
+
+                <?php
+
+                    include ('php/functions/lp_show_products.php');
+                    foreach ($array_cats as $catId){
+
+                        ?>
+                            <div class="row fade-out">
+
+                                <?php  get_lp_products($catId); ?>
+
+                            </div>
+                        <?php
+
+                    }
+
+                ?>
+
             <button class="mt-4"><a href="shop.php" height="100">See More</a></button>
         </div>
     </section>
@@ -309,12 +275,13 @@
     </section>
     <!-- End of Section Contact-us-->
    <?php include('php/footer.php'); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="js/particles.js"></script>
     <script src="js/app.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/script.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
 
     </body>
     </html>

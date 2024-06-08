@@ -9,6 +9,13 @@
     </section>
 
     <section class="product-page p-5">
+        <?php
+            if(isset($_GET['error']) && $_GET['error'] == "qaError"){
+                ?>
+                    <div class="text-center" style="color:#f00">You Have Exceed the limit value of Quantity Available !!</div>
+                <?php
+            }
+        ?>
         <div class="container">
             <div class="row">
                 <div class="col-lg-5">
@@ -70,6 +77,7 @@
                         <button id="buttonAddCart"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                         <button><i class="fa fa-money"></i> Buy Now</button>
                     </form>
+                    <input id='maxQuantity' type="hidden" value="<?php echo $row['quantity_aval']; ?>">
                     <label for="" id="error-msg-max-cart" class="ms-3 " style="color:#f00;display: none;">Maximmum 15 products in Shopping cart</label>
                     <div class="progress m-3">
                         <?php

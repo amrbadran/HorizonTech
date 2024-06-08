@@ -22,11 +22,11 @@ productsInCart.forEach((e) => {
             <h5><a href="">${e.name}</a></h5>
             <p class="product-cart-tags">${e.tags}</p>
         </div>
-        <form class='mt-lg-4 mx-lg-5' action="" >
-            <input type="number" value='${e.quantity}' min="1" width="30">
-        </form>
+        
         <h5 class="product-cart-price mt-lg-4 pt-lg-2 mx-lg-5" >
-            ${e.price}
+             <span>${e.quantity}</span>
+             <span style="margin:0 35px;color:var(--main-color-low-opacity)">X</span>
+             <span>${e.price}</span>            
         </h5>
         <span class="position-absolute"><i class="fa fa-trash"></i></span>
             </div>
@@ -61,80 +61,50 @@ let tax = 3;
             parentIcon.ontransitionend = () => {parentIcon.remove();}
 
 
-            let priceItem = parentIcon.children[3].innerText;
+            let priceItem = parentIcon.children[3].children[2].innerText;
+            let quantity =
             priceItem = priceItem.trim();
 
             sum -= priceItem.slice(0,priceItem.length-1);
             totalCalc();
 
-            let id = parentIcon.children[1].value;
-            console.log(id);
+            removeFromShoppingCart(parentIcon);
 
-            let countSC = +localStorage.getItem('count_shopping_cart');
-            let productsInCart = JSON.parse(localStorage.getItem('shopping_cart'));
-            console.log(productsInCart);
-            let idx = -1;
-            for(let i = 0 ; i<productsInCart.length;i++){
-                if(productsInCart[i].id == id){
-                    idx = i;
-                    break;
-                }
-            }
-            console.log(idx);
-            if(idx >= 0 && idx < productsInCart.length) {countSC-= productsInCart[idx].quantity;productsInCart.splice(idx,1);}
-
-            localStorage.setItem('count_shopping_cart',countSC.toString());
-            localStorage.setItem('shopping_cart',JSON.stringify(productsInCart));
-            document.querySelector('header .fa-shopping-cart span').innerHTML = countSC.toString();
-            noItemsCart.innerText = countSC;
         }
     })
-    cartProductNumber.forEach((num)=>{
-        let id = num.parentElement.parentElement.children[1];
-        let cartProductPrice = num.parentElement.nextElementSibling;
-        let val = cartProductPrice.innerText.slice(0,cartProductPrice.innerText.length-1);
-        num.setAttribute("min","1");
+
+    function removeFromShoppingCart(parentIcon){
+        let id = parentIcon.children[1].value;
+        console.log(id);
         let countSC = +localStorage.getItem('count_shopping_cart');
         let productsInCart = JSON.parse(localStorage.getItem('shopping_cart'));
-        let old = num.value;
-        num.onchange = () => {
-            if(+num.value + countSC > 15){console.log(11);num.value=old; return}
-            cartProductPrice.innerText = (num.value * val).toFixed(2) + '$';
-            console.log(old + ' '+ num.value)
-            if(num.value < old){
-                sum -= +val;
-                countSC--;
-                productsInCart.forEach((e)=>{
-                    if(e.id == id.value) {
-                        e.quantity -= 1;
-                        return;
-                    }
-                })
+        console.log(productsInCart);
+        let idx = -1;
+        for(let i = 0 ; i<productsInCart.length;i++){
+            if(productsInCart[i].id == id){
+                idx = i;
+                break;
             }
-            else {
-                sum+= +val;
-                countSC++;
-                productsInCart.forEach((e)=>{
-                    if(e.id == id.value)e.quantity+=1;
-                })
-            }
-            old = num.value;
-            totalCalc();
-            localStorage.setItem('count_shopping_cart',countSC.toString());
-            localStorage.setItem('shopping_cart',JSON.stringify(productsInCart));
-            document.querySelector('header .fa-shopping-cart span').innerHTML = countSC.toString();
-            noItemsCart.innerText = countSC;
-
-
         }
+        console.log(idx);
+        if(idx >= 0 && idx < productsInCart.length) {countSC-= productsInCart[idx].quantity;productsInCart.splice(idx,1);}
 
-    })
-
+        localStorage.setItem('count_shopping_cart',countSC.toString());
+        localStorage.setItem('shopping_cart',JSON.stringify(productsInCart));
+        document.querySelector('header .fa-shopping-cart span').innerHTML = countSC.toString();
+        noItemsCart.innerText = countSC;
+    }
     let totalCalc = () =>{
         subTotalPrice.innerText = '$'+sum.toFixed(2);
         totalPrice.innerText = '$' + (tax + sum).toFixed(2);
     }
 
+document.querySelector('.button-checkout button').addEventListener('click',()=>{
+
+    localStorage.setItem('subTotalPrice',subTotalPrice.innerText);
+    localStorage.setItem('TotalPrice',totalPrice.innerText);
+
+});
 
 
 

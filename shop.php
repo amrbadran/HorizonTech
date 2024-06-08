@@ -157,8 +157,8 @@
                             $image_path = count($images) > 0 ? 'images/'.$images[0] : $default_path_image;
                             ?>
                             <div class="latest-product">
-                                <a href="javascript:void(0);"><img src="<?php echo $image_path; ?>" width="50" class="float-end" alt=""></a>
-                                <h5><a href="javascript:void(0);"><?php echo implode(' ', array_slice(explode(' ', $row['name']), 0, 2)); ?></a></h5>
+                                <a href="productphp?id=<?php echo $row['id'] ?>"><img src="<?php echo $image_path; ?>" width="50" class="float-end" alt=""></a>
+                                <h5><a href="productphp?id=<?php echo $row['id'] ?>"><?php echo implode(' ', array_slice(explode(' ', $row['name']), 0, 2)); ?></a></h5>
                                 <p><?php echo number_format($row['price'],2) . '$'; ?></p>
                             </div>
 

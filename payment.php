@@ -1,3 +1,12 @@
+<?php
+session_start();
+if(!isset($_SESSION['username'])){
+
+    header("Location: login.php");
+    exit();
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,30 +95,35 @@
 <div class="payment-form">
     <h2>Payment Details</h2>
     <form>
-        <input type="text" name="cardnumber" placeholder="Card Number" required>
+        <input type="text" id="cardNumber" name="cardnumber" placeholder="Card Number" >
         <div class="flex-container">
-            <input type="text" name="expiry" placeholder="MM / YY" required>
-            <input type="text" name="cvc" placeholder="CVC" required>
+            <input type="text" id="expiryDate" name="expiry" placeholder="MM / YY" >
+            <input type="text" id="cvc" name="cvc" placeholder="CVC" >
         </div>
-        <input type="text" name="address" placeholder="Street Address" required>
-        <input type="text" name="apartment" placeholder="Apt, Unit, Suite, etc. (optional)">
-        <select name="country" required>
-            <option value="United States">United States</option>
+        <input type="text" id="streetAddress" name="address" placeholder="Street Address" >
+        <input type="text" id="aptUnit" name="apartment" placeholder="Apt, Unit, Suite, etc. (optional)">
+        <select name="country" id="country">
+            <option value="Palestine">Palestine</option>
             <!-- Add more country options as needed -->
         </select>
-        <input type="text" name="city" placeholder="City" required>
-        <div class="flex-container">
-            <input type="text" name="state" placeholder="State" required>
-            <input type="text" name="zipcode" placeholder="Zip Code" required>
+        <input type="text" name="city" id="city" placeholder="City" >
+        <div class="flex-container" style="margin-bottom:20px;">
+            <input type="text" id="state" name="state" placeholder="State" >
+            <input type="text" id="zipCode" name="zipcode" placeholder="Zip Code" >
         </div>
+        <div id="payment-error-msg" style="color:#f00;text-align: center"></div>
         <div class="summary">
-            <div><span>Subtotal</span><span>$144.00</span></div>
-            <div><span>Yearly plan discount</span><span>-$84.00</span></div>
-            <div class="total"><span>Billed Now</span><span>$60.00</span></div>
+            <div><span>Subtotal</span><span id="subTotal">$144.00</span></div>
+            <div><span>Taxes</span><span>+$3.00</span></div>
+            <div class="total"><span>Billed Now</span><span id="TotalP">$60.00</span></div>
         </div>
-        <button type="submit">Pay</button>
+        <button type="button" id="payButton">Pay</button>
     </form>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="js/payment.js"></script>
+
 </body>
 </html>
-<?php
+

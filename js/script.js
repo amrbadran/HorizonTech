@@ -3,8 +3,17 @@ window.onload = () => {
 
     let stat = document.querySelectorAll('.section-stats p');
     stat.forEach((e)=>{stats_vals.push(e.innerText);e.innerText=0;})
+    document.querySelector('.section-products .nav li:first-child').classList.add('active');
+    document.querySelector(`.section-products .container .row:nth-of-type(1)`).classList.remove('fade-out');
 }
+let listCats = document.querySelectorAll('#section-products .nav li');
+listCats.forEach((e,i) =>{
+    e.addEventListener('click',function (){
+        $('.section-products .row').not('.fade-out').addClass('fade-out');
+        document.querySelector(`.section-products .container .row:nth-of-type(${i+1})`).classList.remove('fade-out');
 
+    })
+})
 let flag = false;
 window.onscroll = function(){
     fixedHeader();
@@ -54,3 +63,4 @@ function fixedHeader(){
         //
     }
 }
+
