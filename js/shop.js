@@ -34,3 +34,19 @@ selectSort.addEventListener('change', () => {
 
     form.submit();
 });
+
+
+let carets = document.querySelectorAll('.card-shop-product  .fa-cart-plus');
+carets.forEach((e)=>{
+
+    let id = e.nextElementSibling.value;
+    let title = e.nextElementSibling.nextElementSibling.value;
+    let quantity = 1;
+    e.addEventListener('click',function (){
+        addToShoppingCart2(id,quantity,title);
+    })
+
+})
+function addToShoppingCart2(id,quantity,title){
+    addToShoppingCart(id,quantity,title);
+}

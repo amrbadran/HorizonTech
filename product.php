@@ -60,15 +60,21 @@
                             <?php echo $row['description']; ?>
                         </span>
                     </p>
-                    <form class='m-3' action="">
-                        <input type="number" value='1' width="30">
-                        <button><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                    <?php
+                    $quantity_aval = $row['quantity_aval'];
+                    ?>
+                    <form class='m-3' >
+                        <input type="number" value='1' min="1" max="<?php echo $quantity_aval; ?>" width="30" id="quantityCart">
+                        <input type="hidden" id="product_id" value="<?php echo $row['id']; ?>">
+                        <input type="hidden" id="username_logged_in" value="<?php if(isset($_SESSION['username']))echo $_SESSION['username']; ?>">
+                        <button id="buttonAddCart"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                         <button><i class="fa fa-money"></i> Buy Now</button>
                     </form>
+                    <label for="" id="error-msg-max-cart" class="ms-3 " style="color:#f00;display: none;">Maximmum 15 products in Shopping cart</label>
                     <div class="progress m-3">
                         <?php
                             $quantity = $row['quantity'];
-                            $quantity_aval = $row['quantity_aval'];
+
                             $sold = (($quantity - $quantity_aval)/$quantity) *100;
                             $sold = (int)$sold;
 
@@ -107,6 +113,10 @@
                                     <a href="product.php?id=<?php echo $row['id']; ?>"><i class="fa fa-eye"></i></a>
 
                                 </div>
+                                <input type="hidden" id="productCategoryCart" value="<?php echo get_category_by_id($row['cat_id']);  ?>"/>
+                                <input type="hidden" id="productTagCart" value="<?php echo $row['tag'];  ?>"/>
+                                <input type="hidden" id="productImageCart" value="<?php echo $image_path;  ?>"/>
+                                <input type="hidden" id="productPriceCart" value="<?php echo number_format($row['price'],2).'$';?>"/>
                                 <div class="product-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -126,6 +136,8 @@
         </div>
     </section>
     <?php include('php/footer.php'); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="js/product.js"></script>
     <script src="js/bootstrap.js"></script>
 </body>

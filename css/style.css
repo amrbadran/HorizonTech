@@ -896,6 +896,7 @@ section{
 .product-page{
     background:var(--second-color);
 }
+
 .product-page .col-lg-7 input[type='number'],.shopping-cart-page form input[type='number']{
     width: 80px;
     padding: 10px 5px;
@@ -1033,6 +1034,20 @@ section{
 }
 .shopping-cart-page .product-cart-info form{
     margin-right:15px;
+
+}
+.product-in-cart form{
+    position: absolute;
+    right:25%;
+}
+@media(max-width:780px){
+    .product-in-cart form,.product-in-cart .product-cart-price{
+        position: static !important;
+    }
+}
+.product-in-cart .product-cart-price{
+    position: absolute;
+    right:10%;
 }
 .shopping-cart-page .product-in-cart span{
     bottom: 15px;

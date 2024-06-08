@@ -33,7 +33,6 @@ $(document).ready(function (){
 $('#login-up').on('submit', function(e) {
     e.preventDefault();
 
-    // Clear previous error messages
     $('#error').text('');
 
     var firstName = $('#firstName').val().trim();

@@ -50,8 +50,13 @@
                                         <h3><?php echo $row['name']; ?> </h3>
                                         <p><?php  echo number_format($row['price'],2) . '$'; ?></p>
                                         <div class="product-icons" align="center">
+
                                             <i class="fa fa-cart-plus"></i>
+                                            <input id="productId" type="hidden" value="<?php echo $row['id']; ?>"/>
+                                            <input id="productTitle" type="hidden" value="<?php echo $row['name']; ?>"/>
                                             <a href="product.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a>
+                                            <label for="" id="error-msg-max-cart" class="ms-3 " style="color:#f00;display: none;">Maximmum 15 products in Shopping cart</label>
+
                                         </div>
                                         <div class="product-rating">
                                             <i class="fa fa-star"></i>
@@ -169,6 +174,7 @@
         </div>
     </section>
    <?php include('php/footer.php'); ?>
+    <script src="js/product.js"></script>
     <script src="js/shop.js"></script>
 
 

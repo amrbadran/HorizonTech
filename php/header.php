@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -30,7 +33,7 @@
                 <i class="fa fa-bars" aria-hidden="true"></i>
             </button>
             <div class="collapse navbar-collapse" id="collapseNav">
-                <ul class="navbar-nav  ms-auto">
+                <ul class="navbar-nav  ms-auto mt-2">
                     <li class="navbar-item"><a href="#" class="navbar-link">Home</a></li>
                     <li class="navbar-item"><a href="#section-services" class="navbar-link">Services</a></li>
                     <li class="navbar-item"><a href="#section-products" class="navbar-link">Shop</a></li>
@@ -38,7 +41,26 @@
                     <li class="navbar-item ms-md-5 shopping-cart-icon"><a href="#" class="navbar-link"><i class="fa fa-shopping-cart">
                                 <span>0</span>
                             </i></a></li>
+                    <?php
+                    if(isset($_SESSION['username'])){
+                        ?>
+                        <li class="nav-item dropdown justify-content-center" style="margin-left:50px;bottom:5px;">
+                            <button class="btn btn-dark dropdown-toggle" style="background-color:var(--second-color);" data-bs-toggle="dropdown" aria-expanded="">
+                                <i class="fa fa-user-circle-o"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" style="background-color:var(--fourth-color);left:-50px;">
+                                <li class="text-center">Hello, <?php echo $_SESSION['username'];?></a></li>
+                                <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" href="php/logout.php"><i class="fa fa-sign-out" style="margin-right:5px;"></i>Logout</a></li>
+
+                            </ul>
+                        </li>
+                        <?php
+                    }
+                    ?>
                 </ul>
+
+
             </div>
         </div>
     </nav>
