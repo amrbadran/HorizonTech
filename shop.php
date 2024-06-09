@@ -2,6 +2,14 @@
 
     <?php
         $default_path_image = "images/keyboards/2.jpg";
+        include ('php/functions/review_products.php');
+        function get_category_by_id($id){
+            global $conn;
+            $sql = "SELECT * FROM category WHERE id = $id";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            return $row['name'];
+        }
     ?>
     <section class="branch-wlc">
 
@@ -45,7 +53,19 @@
 
                                 $image_path = count($images) > 0 ? 'images/'.$images[0] : $default_path_image;
                                 ?>
+
+
+
                                 <div class="col-lg-4">
+
+
+                                    <input type="hidden" id="maxQuantity<?php echo $row['id'];?>" value="<?php echo $row['quantity_aval']; ?>">
+                                    <input type="hidden" id="productQuantity<?php echo $row['id']; ?>" value="0">
+                                    <input type="hidden" id="productTitle<?php echo $row['id'];?>" value="<?php echo $row['name']; ?>"/>
+                                    <input type="hidden" id="productCategoryCart<?php echo $row['id'];?>" value="<?php echo get_category_by_id($row['cat_id']); ?>"/>
+                                    <input type="hidden" id="productTagCart<?php echo $row['id'];?>" value="<?php echo $row['tag']; ?>"/>
+                                    <input type="hidden" id="productImageCart<?php echo $row['id'];?>" value="<?php echo $image_path; ?>"/>
+                                    <input type="hidden" id="productPriceCart<?php echo $row['id'];?>" value="<?php echo number_format($row['price'], 2) . '$'; ?>"/>
                                     <div class="card-shop-product text-center">
                                         <img src="<?php echo $image_path; ?>" class="w-100" alt="" class="">
                                         <h3><?php echo $row['name']; ?> </h3>
@@ -56,17 +76,30 @@
                                             <input id="productId" type="hidden" value="<?php echo $row['id']; ?>"/>
                                             <input id="productTitle" type="hidden" value="<?php echo $row['name']; ?>"/>
                                             <a href="product.php?id=<?php echo $row['id'];?>"><i class="fa fa-eye"></i></a>
-                                            <label for="" id="error-msg-max-cart" class="ms-3 " style="color:#f00;display: none;">Maximmum 15 products in Shopping cart</label>
+                                            <label for="" id="error-msg-max-cart<?php echo $row['id'];?>" class="ms-3 " style="color:#f00;display: none;">Maximmum 15 products in Shopping cart</label>
+                                            <label for="" id="error-msg-max-cart" class="ms-3 " style="color:#f00;display: none;"></label>
 
                                         </div>
                                         <div class="product-rating">
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
-                                            <i class="fa fa-star"></i>
+                                            <?php
+
+                                                $avg_rating = average_count_reviews($row['id'])[0];
+                                                for($i = 0;$i < (int)$avg_rating ; $i++){
+                                                    ?>
+                                                        <i class="fa fa-star"></i>
+                                                    <?php
+
+                                                }
+
+                                            ?>
+
+
                                         </div>
                                     </div>
+
+
+
+
                                 </div>
                                 <?php
 
@@ -183,13 +216,14 @@
         </div>
     </section>
    <?php include('php/footer.php'); ?>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <script src="js/product.js"></script>
     <script src="js/shop.js"></script>
 
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     </body>
     </html>

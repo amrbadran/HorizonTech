@@ -24,6 +24,7 @@
             transition: opacity .6s ease !important;
         }
     </style>
+    
 </head>
 <body>
 <header class="landing-header fixed-top">

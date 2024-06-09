@@ -67,8 +67,8 @@ $(document).ready(function() {
             let productInCart = JSON.parse(localStorage.getItem("shopping_cart"));
             productInCart.forEach(e => {
                 let id = e.id.toString();
-                let quantity = e.quantity.toString();
-
+                let quantity = Number(localStorage.getItem('productQuantityCart'+id));
+                localStorage.removeItem('productQuantityCart'+id);
                 dataCart += id + '+' + quantity + ',';
             })
             dataCart = dataCart.slice(0,dataCart.length - 1);

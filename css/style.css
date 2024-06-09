@@ -1162,3 +1162,62 @@ section{
 
 }
 
+*{
+    margin: 0;
+    padding: 0;
+}
+#ratingProduct {
+    background :var(--third-color);
+    padding:25px 50px;
+
+    width:30%;
+    position: fixed;
+    left:40%;
+    top:50%;
+    border-radius:10px;
+
+
+}
+#ratingProduct #closeRating{
+    position: absolute;
+    right:15px;
+    top:12px;
+    font-size:1.5rem;
+    color :#CCC;
+    cursor: pointer;
+    transition: all .1s ease;
+}
+#ratingProduct #closeRating:hover{
+    color:var(--main-color);
+}
+
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: var(--main-color);
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: var(--main-color);
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: var(--main-color);
+}

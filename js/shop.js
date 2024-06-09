@@ -39,11 +39,26 @@ selectSort.addEventListener('change', () => {
 let carets = document.querySelectorAll('.card-shop-product  .fa-cart-plus');
 carets.forEach((e)=>{
 
-    let id = e.nextElementSibling.value;
-    let title = e.nextElementSibling.nextElementSibling.value;
-    let quantity = 1;
+    let productId = e.nextElementSibling.value;
+
+
+    var incs = +$("#productQuantity"+productId).val();
+    var cartQuan = new Number(document.querySelector('header .fa-shopping-cart span').innerHTML.toString());
+    var title = $('#productTitle'+productId).val();
+    var category = $('#productCategoryCart'+productId).val();
+    var image_path = $('#productImageCart'+productId).val();
+    var tag = $('#productTagCart'+productId).val();
+    var price = $('#productPriceCart'+productId).val();
+    var maxQuantity = +$("#maxQuantity"+productId).val();
+
     e.addEventListener('click',function (){
-        addToShoppingCart2(id,quantity,title);
+        var quantity = localStorage.getItem('productQuantityCart'+productId) === null ? '0' : localStorage.getItem('productQuantityCart'+productId);
+
+        let x =Number(quantity) + 1;
+
+        localStorage.setItem('productQuantityCart'+productId,x.toString());
+        let z = 1;
+        addToShoppingCart(productId, z,title, category, image_path, tag, price,maxQuantity);
     })
 
 })
