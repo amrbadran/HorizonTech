@@ -256,16 +256,16 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <form action="">
+                    <form action="php/functions/send_email.php" method="post">
                         <div class="form-group mt-2 d-flex">
-                            <input type="text" placeholder="Name" class="form-control me-2 w-50">
-                            <input type="email" placeholder="Email" class="form-control ms-2 w-50">
+                            <input name='name' type="text" placeholder="Name" class="form-control me-2 w-50">
+                            <input name='email' type="email" placeholder="Email" class="form-control ms-2 w-50">
                         </div>
                         <div class="form-group">
-                            <input type="text" placeholder="Subject" class="form-control">
+                            <input name='subject' type="text" placeholder="Subject" class="form-control">
                         </div>
                         <div class="form-group">
-                            <textarea name="" placeholder="Message" id="" cols="20" rows="6" class="form-control"></textarea>
+                            <textarea name="message" placeholder="Message" id="" cols="20" rows="6" class="form-control"></textarea>
                         </div>
                         <button>Send Message</button>
                     </form>

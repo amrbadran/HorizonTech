@@ -42,6 +42,7 @@
 
                             while($row = $result->fetch_assoc()){
                                 $images = get_images_product($row['id']);
+
                                 $image_path = count($images) > 0 ? 'images/'.$images[0] : $default_path_image;
                                 ?>
                                 <div class="col-lg-4">
@@ -84,15 +85,9 @@
                                 if ($cur_page  < 1) $cur_page  = 1;
                                 $cur_page_back = $cur_page <= 1 ? 1 : $cur_page - 1;
                                 $cur_page_forward = $cur_page <= $total_pages ? $total_pages : $cur_page + 1;
-                                $url = "shop.php";
-                                if(isset($_GET['search'])){
-                                    $url = $url . "?search=". $_GET['search'] . '&page=';
-                                }
-                                else{
-                                    $url = $url . "?page=";
-                                }
+
                                 ?>
-                                <li class="page-item"><a class="page-link" href="<?php echo $url . $cur_page_back; ?>"><i class="fa fa-arrow-left"></i></a></li>
+                                <li class="page-item"><a class="page-link" href="<?php echo addGetQuery('page',$cur_page_back); ?>"><i class="fa fa-arrow-left"></i></a></li>
                                 <?php
                                 $pagesMax = $total_pages > 3 ? 3 : $total_pages;
 
@@ -100,12 +95,12 @@
 
                                     if ($i == $cur_page ){
                                         ?>
-                                        <li class="page-item active"><a class="page-link" href="<?php echo $url . $i; ?>"><?php echo $i; ?></a></li>
+                                        <li class="page-item active"><a class="page-link" href="<?php echo addGetQuery('page',$i); ?>"><?php echo $i; ?></a></li>
                                     <?php
                                     }
                                     else{
                                         ?>
-                                        <li class="page-item"><a class="page-link" href="<?php echo $url . $i; ?>"><?php echo $i; ?></a></li>
+                                        <li class="page-item"><a class="page-link" href="<?php echo addGetQuery('page',$i); ?>"><?php echo $i; ?></a></li>
                                     <?php
                                     }
 
@@ -113,13 +108,27 @@
 
                             ?>
 
-                            <li class="page-item"><a class="page-link" href="<?php echo $url . $cur_page_forward; ?>"><i class="fa fa-arrow-right"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="<?php echo addGetQuery('page',$cur_page_forward); ?>"><i class="fa fa-arrow-right"></i></a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="product-search">
                         <form action="shop.php" method="get">
+                            <?php
+                                if(isset($_GET['catId'])){
+                                    ?>
+                                    <input type="hidden" name="catId" value="<?php echo $_GET['catId'];?>"/>
+                                    <?php
+                                }
+                                if(isset($_GET['page'])){
+                                    ?>
+                                    <input type="hidden" name="page" value="<?php echo $_GET['page'];?>"/>
+
+                                    <?php
+                                }
+
+                            ?>
                             <input id="search-product" type="text" class="w-lg-100" placeholder="Search..." name="search">
                         </form>
 

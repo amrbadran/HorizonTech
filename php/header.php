@@ -52,6 +52,7 @@
                             <ul class="dropdown-menu dropdown-menu-dark" style="background-color:var(--fourth-color);left:-50px;">
                                 <li class="text-center">Hello, <?php echo $_SESSION['username'];?></a></li>
                                 <div class="dropdown-divider"></div>
+                                <li><a class="dropdown-item" href="orders.php"><i class="fa fa-first-order" style="margin-right:5px;"></i>Orders</a></li>
                                 <li><a class="dropdown-item" href="php/logout.php"><i class="fa fa-sign-out" style="margin-right:5px;"></i>Logout</a></li>
 
                             </ul>

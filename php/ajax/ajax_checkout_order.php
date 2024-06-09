@@ -4,7 +4,7 @@ $path_config = $_SERVER['DOCUMENT_ROOT'] . '/HorizonTech/php/config.php';
 include(  $path_config);
 $user_id = $_SESSION['user_id'];
 $address = $_POST['streetAddress'];
-$sql = "INSERT INTO orders(usr_id,address) VALUES ($user_id,$address);";
+$sql = "INSERT INTO orders(usr_id,address) VALUES ($user_id,'$address');";
 
 
 $dataCart = $_POST['dataCart'];

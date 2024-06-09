@@ -2,7 +2,11 @@ $(document).ready(function() {
 
     $('#subTotal').text(localStorage.getItem('subTotalPrice'));
     $('#TotalP').text(localStorage.getItem('TotalPrice'));
-
+    let productsInCart = JSON.parse(localStorage.getItem('shopping_cart'));
+    console.log(productsInCart);
+    if(productsInCart.length == 0){
+        window.location.href = "cart.php";
+    }
     if(localStorage.getItem('TotalPrice') == ""){
         window.location.href="cart.php";
     }
@@ -85,18 +89,18 @@ $(document).ready(function() {
 
                 },
                 success: function(response) {
-                    if(response == 'success'){
+                    if(response.includes('success')){
                         window.location.href="index.php";
                         localStorage.setItem('shopping_cart',JSON.stringify([]));
                         localStorage.setItem('count_shopping_cart','0');
+                        localStorage.setItem('paid','1');
                     }
                     else if(response.toString()[0] == 'E'){
                         let idToHandle = response.toString().slice(1);
-
                          window.location.href = `product.php?id=${idToHandle}&error=qaError`;
                     }
                     else {
-                        $('#payment-error-msg').text('Payment processing failed: ' + response);
+                        window.location.href = "404.php?msg="+'Payment processing failed: ' + response;
                     }
 
                 },

@@ -21,6 +21,13 @@
 
         }
     }
+    function getCatId(){
+        if(isset($_GET['catId'])){
+            $catId = $_GET['catId'];
+            return " AND cat_id = '$catId'";
+        }
+        return "";
+    }
     function show_products()
     {
         global $conn;
@@ -29,7 +36,10 @@
         global $total_pages;
         $results_per_page = 9;
 
-        $sql = "SELECT COUNT(id) AS total FROM product WHERE name LIKE ?".select_sort();
+
+
+        $sql = "SELECT COUNT(id) AS total FROM product WHERE name LIKE ?".getCatId().select_sort();
+
         $price = 0;
         $search = isset($_GET['search']) ? $_GET['search'] : "";
         $name_match = "%" . $search .  "%";
@@ -50,7 +60,7 @@
 
         $start_from = ($page - 1) * $results_per_page;
 
-        $sql = "SELECT * FROM product WHERE name LIKE ?".select_sort()." LIMIT ?,?";
+        $sql = "SELECT * FROM product WHERE name LIKE ?".getCatId().select_sort()." LIMIT ?,?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('sss', $name_match,$start_from,$results_per_page);
         $stmt->execute();
@@ -79,4 +89,26 @@
 
     }
 
+    function addGetQuery($queryData,$value){
+
+    $current_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+    $url_components = parse_url($current_url);
+    $query_array = array();
+        if (isset($url_components['query'])) {
+            parse_str($url_components['query'], $query_array);
+        }
+
+
+    $query_array[$queryData] = $value;
+
+    $new_query_string = http_build_query($query_array);
+
+    $new_url = $url_components['scheme'] . '://' . $url_components['host'] . $url_components['path'] . '?' . $new_query_string;
+
+    return $new_url;
+
+
+
+    }
 
