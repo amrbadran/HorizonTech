@@ -27,6 +27,31 @@ filterPriceButton.onclick = function(){
 
 }
 
+
+let carets = document.querySelectorAll('.card-shop-product  .fa-cart-plus');
+carets.forEach((e)=>{
+
+    let productId = e.nextElementSibling.value;
+    e.addEventListener('click',function (){
+        const obj = {
+            id: e.nextElementSibling.value,
+            name: $('#productTitle'+productId).val(),
+            category: $('#productCategoryCart'+productId).val(),
+            image: $('#productImageCart'+productId).val(),
+            tags: $('#productTagCart'+productId).val(),
+            price: $('#productPriceCart'+productId).val(),
+            quantity:1,
+            maxQuantity:Number($("#maxQuantity"+productId).val()) -  getCartQuantityProduct(Number(e.nextElementSibling.value))
+        }
+
+        console.log(obj);
+        add_to_shopping_cart(obj);
+    })
+
+})
+
+
+
 let form = document.querySelector('.select-form');
 let selectSort = document.querySelector('#select_sort');
 
@@ -34,34 +59,3 @@ selectSort.addEventListener('change', () => {
 
     form.submit();
 });
-
-
-let carets = document.querySelectorAll('.card-shop-product  .fa-cart-plus');
-carets.forEach((e)=>{
-
-    let productId = e.nextElementSibling.value;
-
-
-    var incs = +$("#productQuantity"+productId).val();
-    var cartQuan = new Number(document.querySelector('header .fa-shopping-cart span').innerHTML.toString());
-    var title = $('#productTitle'+productId).val();
-    var category = $('#productCategoryCart'+productId).val();
-    var image_path = $('#productImageCart'+productId).val();
-    var tag = $('#productTagCart'+productId).val();
-    var price = $('#productPriceCart'+productId).val();
-    var maxQuantity = +$("#maxQuantity"+productId).val();
-
-    e.addEventListener('click',function (){
-        var quantity = localStorage.getItem('productQuantityCart'+productId) === null ? '0' : localStorage.getItem('productQuantityCart'+productId);
-
-        let x =Number(quantity) + 1;
-
-        localStorage.setItem('productQuantityCart'+productId,x.toString());
-        let z = 1;
-        addToShoppingCart(productId, z,title, category, image_path, tag, price,maxQuantity);
-    })
-
-})
-function addToShoppingCart2(id,quantity,title){
-    addToShoppingCart(id,quantity,title);
-}

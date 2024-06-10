@@ -37,10 +37,3 @@ A computer store offers a wide range of hardware, software, and accessories cate
         </div>
     </section>
 
-    <script>
-
-        window.addEventListener('load',()=>{
-            document.querySelector('header .fa-shopping-cart span').innerHTML = localStorage.getItem('count_shopping_cart');
-        })
-
-    </script>

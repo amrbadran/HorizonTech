@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+<!--    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">-->
     <title>Horizon Tech</title>
     <style>
 
@@ -24,7 +24,29 @@
             transition: opacity .6s ease !important;
         }
     </style>
-    
+    <script>
+        function getCountCart(carts){
+
+            if(carts === null) return 0;
+            carts = JSON.parse(carts);
+            let countCart = 0;
+
+            carts.forEach((e)=>{
+
+                countCart = Number(countCart) + Number(e.quantity);
+            });
+
+            return countCart;
+        }
+        setInterval(()=>{
+
+            document.querySelector('header .fa-shopping-cart span').innerHTML = getCountCart(localStorage.getItem('shopping_cart')).toString();
+        },15);
+        // window.onload = function (){
+        //     localStorage.setItem('shopping_cart',JSON.stringify([]));
+        //
+        // }
+    </script>
 </head>
 <body>
 <header class="landing-header fixed-top">

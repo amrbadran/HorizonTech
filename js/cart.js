@@ -1,15 +1,32 @@
-console.log(localStorage.getItem('shopping_cart'));
-
 
 let productsInCart = JSON.parse(localStorage.getItem("shopping_cart"));
 let content = document.getElementById('containerProducts');
 let subTotalPrice = document.getElementById('shopping-cart-subtotal');
 let totalPrice = document.getElementById('shopping-cart-total');
 
-let s = 0;
+function getSubPrice(){
+    let carts = JSON.parse(localStorage.getItem('shopping_cart'));
+    let sum =0;
+    carts.forEach((e)=>{
+        let p= e.price.slice(0 , e.price.length - 1);
+        sum = Number(sum) + ( Number(p) * Number(e.quantity));
+    })
+    return sum;
+}
+console.log(localStorage.getItem('shopping_cart'));
+console.log(111);
+let s = getSubPrice();
+function countProductCart(id){
+    let carts = JSON.parse(localStorage.getItem('shopping_cart'));
+    let res = -1;
+    carts.forEach((e)=>{
+        if(e.id === id){res = e.quantity}
+    })
+    return res;
+}
 productsInCart.forEach((e) => {
     s += (+e.price.slice(0, e.price.length - 1)) * Number(localStorage.getItem('productQuantityCart' + e.id));
-    console.log(localStorage.getItem('productQuantityCart' + e.id));
+    let quan = countProductCart(e.id);
     $('#containerProducts').prepend(`
             <div class="product-in-cart d-lg-flex w-100 position-relative">
             <div class="image-cart-product">
@@ -23,7 +40,7 @@ productsInCart.forEach((e) => {
         </div>
         
         <h5 class="product-cart-price mt-lg-4 pt-lg-2 mx-lg-5" >
-             <span>${localStorage.getItem('productQuantityCart' + e.id)}</span>
+             <span>${quan}</span>
              <span style="margin:0 35px;color:var(--main-color-low-opacity)">X</span>
              <span>${e.price}</span>            
         </h5>
@@ -45,7 +62,10 @@ let sum = +subTotalPrice.innerText.slice(1);
 let trashIcons = document.querySelectorAll('.shopping-cart-page .fa-trash');
 
 let noItemsCart = document.getElementById('no-items-in-cart');
-noItemsCart.innerText = localStorage.getItem('count_shopping_cart');
+
+noItemsCart.innerText = getCountCart(localStorage.getItem('shopping_cart'));
+
+
 let check = setInterval(() => {
     if (sum == 0) {
         totalPrice.innerText = '$0.00';
@@ -76,7 +96,7 @@ trashIcons.forEach((icon) => {
 function removeFromShoppingCart(parentIcon) {
     let id = parentIcon.children[1].value;
     console.log(id);
-    let countSC = +localStorage.getItem('count_shopping_cart');
+
     let productsInCart = JSON.parse(localStorage.getItem('shopping_cart'));
     console.log(productsInCart);
     let idx = -1;
@@ -88,15 +108,12 @@ function removeFromShoppingCart(parentIcon) {
     }
     console.log(idx);
     if (idx >= 0 && idx < productsInCart.length) {
-        countSC -= Number(localStorage.getItem('productQuantityCart' + id));
+
         productsInCart.splice(idx, 1);
     }
 
-    localStorage.setItem('count_shopping_cart', countSC.toString());
     localStorage.setItem('shopping_cart', JSON.stringify(productsInCart));
-    localStorage.setItem('productQuantityCart' + id, '0');
-    document.querySelector('header .fa-shopping-cart span').innerHTML = countSC.toString();
-    noItemsCart.innerText = countSC;
+    noItemsCart.innerText = getCountCart(localStorage.getItem('shopping_cart'));
 }
 
 let totalCalc = () => {

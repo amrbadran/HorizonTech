@@ -67,6 +67,7 @@ if (isset($_SESSION['user_id']) && can_review( $_SESSION['user_id'] , $id)) {
                     $image_path = count($images) > 0 ? 'images/' . $images[0] : $default_path_image;
 
                     ?>
+                    <input type="hidden" id="productImageCart" value="<?php echo $image_path;?>">
                     <img src="<?php echo $image_path; ?>" alt="" class="img-fluid">
                 </div>
 
@@ -100,6 +101,7 @@ if (isset($_SESSION['user_id']) && can_review( $_SESSION['user_id'] , $id)) {
                     <span class="m-2">(<?php echo $rating_result[1]; ?> Customers Review)</span>
                 </div>
                 <div class="product-price m-3">
+                    <input type="hidden" id="productPriceCart" value="<?php echo number_format($row['price'], 2) . '$'; ?>">
                     <h3><?php echo number_format($row['price'], 2) . '$'; ?></h3>
                 </div>
                 <p class="description-product m-3">
@@ -110,13 +112,16 @@ if (isset($_SESSION['user_id']) && can_review( $_SESSION['user_id'] , $id)) {
                 <?php
                 $quantity_aval = $row['quantity_aval'];
                 ?>
-                <form class='m-3'>
+                <form class='m-3' >
                     <input type="number" value='1' min="1" max="<?php echo $quantity_aval; ?>" width="30"
                            id="quantityCart">
+
                     <input type="hidden" id="product_id" value="<?php echo $row['id']; ?>">
+                    <input type="hidden" id="titleProduct" value="<?php echo $row['name']; ?>">
+
                     <input type="hidden" id="username_logged_in"
                            value="<?php if (isset($_SESSION['username'])) echo $_SESSION['username']; ?>">
-                    <button id="buttonAddCart"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                    <button type="button" id="buttonAddCart"><i class="fa fa-shopping-cart"></i> Add to cart</button>
                     <button><i class="fa fa-money"></i> Buy Now</button>
                 </form>
                 <input id='maxQuantity' type="hidden" value="<?php echo $row['quantity_aval']; ?>">
@@ -138,7 +143,9 @@ if (isset($_SESSION['user_id']) && can_review( $_SESSION['user_id'] , $id)) {
                             style="color:#ccc;"><?php echo $quantity - $quantity_aval; ?></span></p>
 
                 <div class="info-product m-3">
+                    <input type="hidden" id="categoryProduct" value="<?php echo get_category_by_id($row['cat_id']); ?>">
                     <p><b>Category: </b><?php echo get_category_by_id($row['cat_id']); ?></p>
+                    <input type="hidden" id="productTagCart" value="<?php echo $row['tag']; ?>">
                     <p><b>Tags: </b> <?php echo $row['tag']; ?></p>
                     <p><b>Manufacturer:</b> <?php echo $row['manufacturer']; ?></p>
                     <p><b>SKU: </b>NT-002345-01-12</p>

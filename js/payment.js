@@ -1,3 +1,4 @@
+
 $(document).ready(function() {
 
     $('#subTotal').text(localStorage.getItem('subTotalPrice'));
@@ -66,12 +67,14 @@ $(document).ready(function() {
             let dataCart ="";
             let productInCart = JSON.parse(localStorage.getItem("shopping_cart"));
             productInCart.forEach(e => {
+                //console.log(JSON.stringify(e));
                 let id = e.id.toString();
-                let quantity = Number(localStorage.getItem('productQuantityCart'+id));
-                localStorage.removeItem('productQuantityCart'+id);
+                let quantity = Number(e.quantity);
+
                 dataCart += id + '+' + quantity + ',';
             })
             dataCart = dataCart.slice(0,dataCart.length - 1);
+
             $.ajax({
                 url: 'php/ajax/ajax_checkout_order.php',
                 type: 'POST',
@@ -92,7 +95,7 @@ $(document).ready(function() {
                     if(response.includes('success')){
                         window.location.href="index.php";
                         localStorage.setItem('shopping_cart',JSON.stringify([]));
-                        localStorage.setItem('count_shopping_cart','0');
+
                         localStorage.setItem('paid','1');
                     }
                     else if(response.toString()[0] == 'E'){
