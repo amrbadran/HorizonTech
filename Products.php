@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="./css/font-awesome.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        .profile-img {
+            height: 80px;
+            width: 80px;
+            display: inline-block;
+            margin: 0 auto .5rem auto;
+            border: 3px solid hsl(0, 0%, 9%);;
+        }
+
+        .profile-img img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            margin: 0 auto .5rem auto;
+            background-color: white;
+        }
+    </style>
+
+
 </head>
 <body>
 <input type="checkbox" id="menu-toggle">
@@ -20,39 +39,46 @@
 
     <div class="side-content">
         <div class="profile">
-            <div class="profile-img bg-img"></div>
-            <h4>David Green</h4>
-            <small>Art Director</small>
+            <div class="profile-img">
+                <img src="images/corporate-user-icon.png" alt="User Icon">
+            </div>
+            <?php
+            session_start();
+            if (isset($_SESSION['username'])) {
+                echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
+            }
+            ?>
+            <small>Admin</small>
         </div>
 
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.html" class="active">
+                    <a href="Dashboard.php" class="active">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
                 </li>
                 <li>
                     <a href="products.html">
-                        <span ><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Category.html">
-                        <span ><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
+                    <a href="Category.php">
+                        <span><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Customers.html">
-                        <span ><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <a href="Customers.php">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Orders.html">
+                    <a href="Order.php">
                         <span><i class="fa fa-list" aria-hidden="true"></i></span>
                         <small>Orders</small>
                     </a>
@@ -89,9 +115,10 @@
 
                 <div class="user">
                     <div class="bg-img"></div>
-
-                    <span class="las la-power-off"></span>
-                    <span>Logout</span>
+                    <a href="php/logout.php">
+                        <span class="las la-power-off"></span>
+                        <span>Logout</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -120,19 +147,19 @@
                             <div class="uploadfile">
                                 <div>
                                     <input type="file" id="btn">
-                                    <label class="label5" for="btn"> <i class="fa fa-upload" aria-hidden="true"></i>
-                                        Upload Image</label>
+                                    <label class="label5" for="btn">
+                                        <i class="fa fa-upload" aria-hidden="true"></i>
+                                        Upload Image
+                                    </label>
                                 </div>
                                 <div>
                                     <button id="addProductbtn"></button>
-                                    <label class="label5" for="addProductbtn"><i class="fa fa-plus-square-o"
-                                                                                 aria-hidden="true"></i> Add
-                                        Product</label>
+                                    <label class="label5" for="addProductbtn">
+                                        <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                        Add Product
+                                    </label>
                                 </div>
-
-
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -142,46 +169,53 @@
                 <table width="100%">
                     <thead>
                     <tr>
-                        <th>ID</th>
+                        <th> ID</th>
                         <th> Name</th>
-                        <th> Category</th>
-                        <th> Manifacturer</th>
-                        <th> Description</th>
                         <th> Price</th>
+                        <th> Manufacturer</th>
+                        <th> Category ID</th>
+                        <th> Added Date </th>
+                        <th> Tag </th>
+                        <th> quantity </th>
+                        <th> quantity available </th>
                         <th> Action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>#5033</td>
-                        <td>
-                            <div class="client">
-                                <div class="client-img bg-img"></div>
-                                <div class="client-info">
-                                    <h4>mouse</h4>
-                                    <small>eraser</small>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            $3171
-                        </td>
-                        <td>
-                            19 April, 2022
-                        </td>
-                        <td>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi asperiores ex illo libero
-                        </td>
-                        <td>
-                            -$205
-                        </td>
-                        <td>
-                            <div class="actions">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </div>
-                        </td>
-                    </tr>
+                    <?php
+                    include ("php/config.php");
+                    $sql = "SELECT * FROM product";
+
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<tr>";
+                            echo "<td>" . $row["id"] . "</td>";
+                            echo "<td>" . $row["name"] . "</td>";
+                            echo "<td>" . $row["price"] . "</td>";
+                            echo "<td>" . $row["manufacturer"] . "</td>";
+                            echo "<td>" . $row["cat_id"] . "</td>";
+                            echo "<td>" . $row["date_added"] . "</td>";
+                            echo "<td>" . $row["tag"] . "</td>";
+                            echo "<td>" . $row["quantity"] . "</td>";
+                            echo "<td>" . $row["quantity_aval"] . "</td>";
+                            echo '<td>
+                                    <div class="actions">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </div>
+                                   </td>';
+                            echo "</tr>";
+                        }
+                    } else {
+                        echo "0 results";
+                    }
+
+                    // Close the connection
+                    $conn->close();
+                    ?>
                     </tbody>
                 </table>
             </div>

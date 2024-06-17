@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-    <title>Modern Admin Dashboard</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="css/Dashboard.css">
     <link rel="stylesheet"
           href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css">
@@ -13,6 +13,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .profile-img {
+            height: 80px;
+            width: 80px;
+            display: inline-block;
+            margin: 0 auto .5rem auto;
+            border: 3px solid hsl(0, 0%, 9%);;
+        }
+
+        .profile-img img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            margin: 0 auto .5rem auto;
+            background-color: white;
+        }
+    </style>
+
+
 </head>
 <body>
 <input type="checkbox" id="menu-toggle">
@@ -23,42 +42,46 @@
 
     <div class="side-content">
         <div class="profile">
-            <div class="profile-img bg-img">
-                
-
+            <div class="profile-img">
+                <img src="images/corporate-user-icon.png" alt="User Icon">
             </div>
-            <h4>David Green</h4>
-            <small>Art Director</small>
+            <?php
+            session_start();
+            if (isset($_SESSION['username'])) {
+                echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
+            }
+            ?>
+            <small>Admin</small>
         </div>
 
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.html" class="active">
+                    <a href="Dashboard.php" class="active">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
                 </li>
                 <li>
-                    <a href="products.html">
-                        <span ><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                    <a href="Products.php">
+                        <span><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Category.html">
-                        <span ><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
+                    <a href="Category.php">
+                        <span><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Customers.html">
-                        <span ><i class="fa fa-users" aria-hidden="true"></i></span>
+                    <a href="Customers.php">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Orders.html">
+                    <a href="Order.php">
                         <span><i class="fa fa-list" aria-hidden="true"></i></span>
                         <small>Orders</small>
                     </a>
@@ -79,7 +102,7 @@
             </label>
 
             <div class="header-menu">
-                <label >
+                <label>
                     <span class="las la-search"></span>
                 </label>
 
@@ -95,9 +118,10 @@
 
                 <div class="user">
                     <div class="bg-img" style="background-image: url(images/corporate-user-icon.png)"></div>
-
-                    <span class="las la-power-off"></span>
-                    <span>Logout</span>
+                    <a href="php/logout.php">
+                        <span class="las la-power-off"></span>
+                        <span>Logout</span>
+                    </a>
                 </div>
             </div>
         </div>

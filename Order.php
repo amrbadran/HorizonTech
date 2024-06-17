@@ -10,6 +10,25 @@
     <link rel="stylesheet" href="./css/font-awesome.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <style>
+        .profile-img {
+            height: 80px;
+            width: 80px;
+            display: inline-block;
+            margin: 0 auto .5rem auto;
+            border: 3px solid hsl(0, 0%, 9%);;
+        }
+
+        .profile-img img {
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+            margin: 0 auto .5rem auto;
+            background-color: white;
+        }
+    </style>
+
+
 </head>
 <body>
 <input type="checkbox" id="menu-toggle">
@@ -20,33 +39,40 @@
 
     <div class="side-content">
         <div class="profile">
-            <div class="profile-img bg-img"></div>
-            <h4>David Green</h4>
-            <small>Art Director</small>
+            <div class="profile-img">
+                <img src="images/corporate-user-icon.png" alt="User Icon">
+            </div>
+            <?php
+            session_start();
+            if (isset($_SESSION['username'])) {
+                echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
+            }
+            ?>
+            <small>Admin</small>
         </div>
 
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.html" class="active">
+                    <a href="Dashboard.php" class="active">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
                 </li>
                 <li>
-                    <a href="products.html">
+                    <a href="Products.php">
                         <span ><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Category.html">
+                    <a href="Category.php">
                         <span ><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>
                 </li>
                 <li>
-                    <a href="Customers.html">
+                    <a href="Customers.php">
                         <span ><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>
@@ -89,9 +115,10 @@
 
                 <div class="user">
                     <div class="bg-img"></div>
-
-                    <span class="las la-power-off"></span>
-                    <span>Logout</span>
+                    <a href="php/logout.php">
+                        <span class="las la-power-off"></span>
+                        <span>Logout</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -119,49 +146,39 @@
                 <table width="100%">
                     <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>UserName</th>
-                        <th>Time</th>
+                        <th>Order ID</th>
+                        <th>User ID</th>
+                        <th>Completed</th>
                         <th>Date</th>
-                        <th>ShoppingCart ID</th>
+                        <th>Address</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1029384</td>
-                        <td>john_doe</td>
-                        <td>10:45 AM</td>
-                        <td>2024-06-06</td>
-                        <td>SC12345</td>
-                    </tr>
-                    <tr>
-                        <td>2039485</td>
-                        <td>jane_smith</td>
-                        <td>02:30 PM</td>
-                        <td>2024-06-05</td>
-                        <td>SC67890</td>
-                    </tr>
-                    <tr>
-                        <td>3094857</td>
-                        <td>alice_wonder</td>
-                        <td>11:15 AM</td>
-                        <td>2024-06-04</td>
-                        <td>SC54321</td>
-                    </tr>
-                    <tr>
-                        <td>4095768</td>
-                        <td>bob_builder</td>
-                        <td>03:00 PM</td>
-                        <td>2024-06-03</td>
-                        <td>SC98765</td>
-                    </tr>
-                    <tr>
-                        <td>5096879</td>
-                        <td>charlie_chap</td>
-                        <td>09:00 AM</td>
-                        <td>2024-06-02</td>
-                        <td>SC24680</td>
-                    </tr>
+                        <?php
+                            include ("php/config.php");
+                        $sql = "SELECT * FROM orders";
+
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["usr_id"] . "</td>";
+                                echo "<td>" . $row["is_complete"] . "</td>";
+                                echo "<td>" . $row["date_order"] . "</td>";
+                                echo "<td>" . $row["address"] . "</td>";
+                                // Add more columns as needed
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
+
+                        // Close the connection
+                        $conn->close();
+                        ?>
                     </tbody>
                 </table>
             </div>
