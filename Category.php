@@ -54,7 +54,7 @@
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.php" class="active">
+                    <a href="Dashboard.php">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Category.html">
+                    <a href="Category.php" class="active">
                         <span><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>

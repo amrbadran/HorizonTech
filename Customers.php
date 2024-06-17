@@ -54,7 +54,7 @@
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.php" class="active">
+                    <a href="Dashboard.php">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
@@ -72,7 +72,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Customers.html">
+                    <a href="Customers.php" class="active">
                         <span ><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>

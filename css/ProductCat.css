@@ -269,7 +269,7 @@ main {
 
 .page-header {
     padding: 1.3rem 1rem;
-    background: var(--main-color);
+    background: var(--second-color);
     border-bottom: 1px solid #dee2e8;
 }
 

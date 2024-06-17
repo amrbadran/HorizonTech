@@ -54,13 +54,13 @@
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.php" class="active">
+                    <a href="Dashboard.php" >
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
                 </li>
                 <li>
-                    <a href="products.html">
+                    <a href="products.php" class="active">
                         <span><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
