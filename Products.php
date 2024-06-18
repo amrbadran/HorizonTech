@@ -34,12 +34,21 @@ if (isset($_POST['submit'])) {
         }
     }
 
+    $query = "SELECT MAX(id) AS last_id FROM product";
+
+    $result = $conn->query($query);
+
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+        $last_product_id = $row['last_id'];
+    }
+
     for ($i = 0; $i < $totalFiles; $i++) {
         // Escape the file path to ensure it's safe for use in the SQL query
         $fileEscaped = $conn->real_escape_string($files[$i]);
 
         // Construct the query with proper quoting
-        $query = "INSERT INTO images_product (path, product_id) VALUES ('$fileEscaped', '2')";
+        $query = "INSERT INTO images_product (path, product_id) VALUES ('$fileEscaped', '$last_product_id')";
 
         // Execute the query
         if ($conn->query($query) === TRUE) {
@@ -334,7 +343,7 @@ function validateInput($value, $type, $fieldName, $allowNull = false)
 
                         // Execute the statement
                         if ($stmt->execute()) {
-                            echo "Record deleted successfully.";
+                            echo "Product deleted successfully.";
                         } else {
                             echo "Error deleting record: " . $conn->error;
                         }
