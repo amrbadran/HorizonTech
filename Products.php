@@ -15,10 +15,38 @@ if (isset($_POST['submit'])) {
     $tag = validateInput($_POST['tag'], 'string', 'Tag');
     $quantity = validateInput($_POST['quantity'], 'integer', 'Quantity');
     $quantityA = validateInput($_POST['quantityA'], 'integer', 'Quantity Available');
+    $totalFiles = count($_FILES['fileImg']['name']);
+    $files = array();
 
-    // Validate quantity available should not be less than quantity
-    if ($quantityA < $quantity) {
-        $errors[] = "Quantity Available cannot be less than Quantity.";
+    for ($i = 0; $i < $totalFiles; $i++) {
+        $imageName = $_FILES['fileImg']['name'][$i];
+        $tempName = $_FILES['fileImg']['tmp_name'][$i];
+        $imageExtension = explode('.', $imageName);
+        $imageExtension = strtolower(end($imageExtension));
+        $newImageName = uniqid() . '.' . $imageExtension;
+
+        // Move the uploaded file to the 'images' directory
+        if (move_uploaded_file($tempName, 'images/' . $newImageName)) {
+            // Add the new image name to the files array
+            $files[] = $newImageName;
+        } else {
+            echo "Failed to upload file: " . $imageName . "<br>";
+        }
+    }
+
+    for ($i = 0; $i < $totalFiles; $i++) {
+        // Escape the file path to ensure it's safe for use in the SQL query
+        $fileEscaped = $conn->real_escape_string($files[$i]);
+
+        // Construct the query with proper quoting
+        $query = "INSERT INTO images_product (path, product_id) VALUES ('$fileEscaped', '2')";
+
+        // Execute the query
+        if ($conn->query($query) === TRUE) {
+            echo "Record inserted successfully for file: " . $files[$i] . "<br>";
+        } else {
+            echo "Error inserting record for file: " . $files[$i] . " - " . $conn->error . "<br>";
+        }
     }
 
     // Check if there are validation errors
@@ -50,10 +78,9 @@ if (isset($_POST['submit'])) {
 }
 
 
-
-
 // Function to validate input
-function validateInput($value, $type, $fieldName, $allowNull = false) {
+function validateInput($value, $type, $fieldName, $allowNull = false)
+{
     if ($allowNull && empty($value)) {
         return null; // Return null if value is empty and allowNull is true
     }
@@ -84,6 +111,7 @@ function validateInput($value, $type, $fieldName, $allowNull = false) {
         return $value;
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -237,19 +265,23 @@ function validateInput($value, $type, $fieldName, $allowNull = false) {
 
             <section class="section-contact">
                 <div class="container">
-                    <form method="post"  action="Products.php" class="form-controler">
+                    <form method="post" enctype="multipart/form-data" action="Products.php" class="form-controler">
                         <div class="form-group mt-2 d-flex">
-                            <input type="text" placeholder="Name" name="name" class="form-control">
-                            <input type="number" placeholder="Price" name="price" class="form-control">
-                            <input type="text" placeholder="Category" name="category"  class="form-control">
-                            <input type="text" placeholder="Manufacturer" name="manufacturer" class="form-control">
-                            <input type="text" placeholder="Tag" name="tag" class="form-control">
-                            <input type="number" placeholder="Quantity" name="quantity" class="form-control">
-                            <input type="number" placeholder="Quantity Available" name="quantityA" class="form-control">
-                            <input type="text" placeholder="Description" name="description" class="form-control description">
+                            <input type="text" placeholder="Name" name="name" class="form-control" required>
+                            <input type="number" placeholder="Price" name="price" class="form-control" required>
+                            <input type="text" placeholder="Category" name="category" class="form-control" required>
+                            <input type="text" placeholder="Manufacturer" name="manufacturer" class="form-control"
+                                   required>
+                            <input type="text" placeholder="Tag" name="tag" class="form-control" required>
+                            <input type="number" placeholder="Quantity" name="quantity" class="form-control" required>
+                            <input type="number" placeholder="Quantity Available" name="quantityA" class="form-control"
+                                   required>
+                            <input type="text" placeholder="Description" name="description"
+                                   class="form-control description" required>
                             <div class="uploadfile">
                                 <div>
-                                    <input type="file" id="btn">
+                                    <input type="file" id="btn" name="fileImg[]" required multiple
+                                           accept=".jpg,.jpeg,.png">
                                     <label class="label5" for="btn">
                                         <i class="fa fa-upload" aria-hidden="true"></i>
                                         Upload Image
@@ -344,7 +376,7 @@ function validateInput($value, $type, $fieldName, $allowNull = false) {
                     } else {
                         echo "0 results";
                     }
-                        $conn->close();
+                    $conn->close();
                     ?>
                     </tbody>
                 </table>
