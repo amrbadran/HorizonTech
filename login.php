@@ -1,10 +1,15 @@
 <?php
-    session_start();
-    if(isset($_SESSION['username'])){
-
+session_start();
+$username = $_SESSION['username'];
+if (isset($username)) {
+    if ($username == "adminTest") {
         header("Location: Dashboard.php");
-        exit();
+    } else {
+
+        header("Location: index.php");
     }
+    exit();
+}
 
 ?>
 <!Doctype html>
@@ -44,7 +49,7 @@
                     <input id="passwordL" type="password" placeholder="Password" class="login__input">
                 </div>
                 <label id="error-message"></label>
-               <button type="submit" class="login__button">Sign In</button>
+                <button type="submit" class="login__button">Sign In</button>
 
                 <div>
                     <span class="login__account">Don't have an Account ?</span>

@@ -175,7 +175,7 @@ body {
     font-size: 1.3rem;
 }
 
-
+/* ///////////////////////////////////////////////////////////////////////////////*/
 .main-content {
     margin-left: 165px;
     width: calc(100% - 165px);
@@ -565,3 +565,6 @@ td{
     display: none;
 }
 
+.actions .fa-trash:hover {
+    color: red; !important;
+}

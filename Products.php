@@ -1,3 +1,91 @@
+<?php
+session_start();
+include("php/config.php");
+
+$errors = []; // Array to store validation errors
+
+// Check if form is submitted
+if (isset($_POST['submit'])) {
+    // Validate each input
+    $name = validateInput($_POST['name'], 'string', 'Name');
+    $price = validateInput($_POST['price'], 'double', 'Price');
+    $manufacturer = validateInput($_POST['manufacturer'], 'string', 'Manufacturer');
+    $description = validateInput($_POST['description'], 'string', 'Description');
+    $category = validateInput($_POST['category'], 'string', 'Category', true); // Allow NULL
+    $tag = validateInput($_POST['tag'], 'string', 'Tag');
+    $quantity = validateInput($_POST['quantity'], 'integer', 'Quantity');
+    $quantityA = validateInput($_POST['quantityA'], 'integer', 'Quantity Available');
+
+    // Validate quantity available should not be less than quantity
+    if ($quantityA < $quantity) {
+        $errors[] = "Quantity Available cannot be less than Quantity.";
+    }
+
+    // Check if there are validation errors
+    if (!empty($errors)) {
+        foreach ($errors as $error) {
+            echo "<p>Error: $error</p>";
+        }
+    } else {
+        // Prepare the SQL statement with placeholders
+        $sql = "INSERT INTO product (name, price, manufacturer, description, cat_id, tag, quantity, quantity_aval)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        // Prepare the statement
+        $stmt = $conn->prepare($sql);
+
+        // Bind parameters to the placeholders
+        $stmt->bind_param("sdssssii", $name, $price, $manufacturer, $description, $category, $tag, $quantity, $quantityA);
+
+        // Execute the statement
+        if ($stmt->execute()) {
+            echo "New record inserted successfully.";
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+
+        // Close the statement
+        $stmt->close();
+    }
+}
+
+
+
+
+// Function to validate input
+function validateInput($value, $type, $fieldName, $allowNull = false) {
+    if ($allowNull && empty($value)) {
+        return null; // Return null if value is empty and allowNull is true
+    }
+
+    if ($type === 'string') {
+        $validated = trim($value); // Trim whitespace
+        if (empty($validated)) {
+            global $errors;
+            $errors[] = "$fieldName is required.";
+        }
+        return $validated;
+    } elseif ($type === 'integer') {
+        $validated = filter_var($value, FILTER_VALIDATE_INT);
+        if ($validated === false) {
+            global $errors;
+            $errors[] = "$fieldName must be a valid integer.";
+        }
+        return $validated;
+    } elseif ($type === 'double') {
+        $validated = filter_var($value, FILTER_VALIDATE_FLOAT);
+        if ($validated === false) {
+            global $errors;
+            $errors[] = "$fieldName must be a valid number.";
+        }
+        return $validated;
+    } else {
+        // Handle other types if necessary
+        return $value;
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,6 +114,20 @@
             margin: 0 auto .5rem auto;
             background-color: white;
         }
+
+        .page-header {
+            background-color: hsl(0, 0%, 9%);;
+        }
+
+        .actions .fa-trash:hover {
+            color: red;
+        !important;
+        }
+
+        .actions .fa-pencil:hover {
+            color: blue;
+        !important;
+        }
     </style>
 
 
@@ -43,7 +145,6 @@
                 <img src="images/corporate-user-icon.png" alt="User Icon">
             </div>
             <?php
-            session_start();
             if (isset($_SESSION['username'])) {
                 echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
             }
@@ -54,7 +155,7 @@
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.php" >
+                    <a href="Dashboard.php">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
@@ -136,14 +237,16 @@
 
             <section class="section-contact">
                 <div class="container">
-                    <form action="" class="form-controler">
+                    <form method="post"  action="Products.php" class="form-controler">
                         <div class="form-group mt-2 d-flex">
-                            <input type="text" placeholder="ID" class="form-control">
-                            <input type="email" placeholder="Name" class="form-control">
-                            <input type="email" placeholder="Category" class="form-control">
-                            <input type="email" placeholder="Manufacturer" class="form-control">
-                            <input type="email" placeholder="Price" class="form-control">
-                            <input type="email" placeholder="Description" class="form-control">
+                            <input type="text" placeholder="Name" name="name" class="form-control">
+                            <input type="number" placeholder="Price" name="price" class="form-control">
+                            <input type="text" placeholder="Category" name="category"  class="form-control">
+                            <input type="text" placeholder="Manufacturer" name="manufacturer" class="form-control">
+                            <input type="text" placeholder="Tag" name="tag" class="form-control">
+                            <input type="number" placeholder="Quantity" name="quantity" class="form-control">
+                            <input type="number" placeholder="Quantity Available" name="quantityA" class="form-control">
+                            <input type="text" placeholder="Description" name="description" class="form-control description">
                             <div class="uploadfile">
                                 <div>
                                     <input type="file" id="btn">
@@ -153,7 +256,8 @@
                                     </label>
                                 </div>
                                 <div>
-                                    <button id="addProductbtn"></button>
+
+                                    <input type="submit" name="submit" id="addProductbtn" value="Submit">
                                     <label class="label5" for="addProductbtn">
                                         <i class="fa fa-plus-square-o" aria-hidden="true"></i>
                                         Add Product
@@ -174,16 +278,40 @@
                         <th> Price</th>
                         <th> Manufacturer</th>
                         <th> Category ID</th>
-                        <th> Added Date </th>
-                        <th> Tag </th>
-                        <th> quantity </th>
-                        <th> quantity available </th>
+                        <th> Added Date</th>
+                        <th> Tag</th>
+                        <th> quantity</th>
+                        <th> quantity available</th>
                         <th> Action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                    include ("php/config.php");
+                    if (isset($_GET['id'])) {
+                        // Sanitize the 'id' parameter to prevent SQL injection
+                        $id = intval($_GET['id']);
+
+                        // Prepare SQL statement to delete the row with the specified id
+                        $sql = "DELETE FROM product WHERE id = ?";
+
+                        // Prepare the statement
+                        $stmt = $conn->prepare($sql);
+
+                        // Bind the parameter
+                        $stmt->bind_param("i", $id);
+
+                        // Execute the statement
+                        if ($stmt->execute()) {
+                            echo "Record deleted successfully.";
+                        } else {
+                            echo "Error deleting record: " . $conn->error;
+                        }
+
+                        // Close the statement
+                        $stmt->close();
+                    }
+
+
                     $sql = "SELECT * FROM product";
 
                     $result = $conn->query($sql);
@@ -203,8 +331,12 @@
                             echo "<td>" . $row["quantity_aval"] . "</td>";
                             echo '<td>
                                     <div class="actions">
+                                        <a href="Products.php?id=' . $row["id"] . '">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="Products.php?id=' . $row["id"] . '">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                    </td>';
                             echo "</tr>";
@@ -212,17 +344,13 @@
                     } else {
                         echo "0 results";
                     }
-
-                    // Close the connection
-                    $conn->close();
+                        $conn->close();
                     ?>
                     </tbody>
                 </table>
             </div>
         </div>
-
     </main>
-
 </div>
 </body>
 </html>

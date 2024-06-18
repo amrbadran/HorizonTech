@@ -26,6 +26,9 @@
             margin: 0 auto .5rem auto;
             background-color: white;
         }
+        .page-header{
+            background-color: hsl(0, 0%, 9%);;
+        }
     </style>
 
 
