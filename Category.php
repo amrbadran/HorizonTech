@@ -1,3 +1,42 @@
+<?php
+session_start();
+include("php/config.php");
+
+// Function to validate input
+function validateInput($data, $type, $fieldName) {
+    // Implement validation logic as needed
+    return $data; // For this example, simply return the data
+}
+
+if (isset($_POST['submit'])) {
+    // Validate input
+    $name = validateInput($_POST['name'], 'string', 'Name');
+    $description = validateInput($_POST['description'], 'string', 'Description');
+
+    // Insert into the category table
+    $sql = "INSERT INTO category (name, description) VALUES (?, ?)";
+
+    $stmt = $conn->prepare($sql);
+
+    // Check for errors in preparing the statement
+    if ($stmt === false) {
+        die('Error preparing statement: ' . $conn->error);
+    }
+
+    // Bind parameters
+    $stmt->bind_param("ss", $name, $description);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "New record inserted successfully.";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close the statement
+    $stmt->close();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +96,6 @@
                 <img src="images/corporate-user-icon.png" alt="User Icon">
             </div>
             <?php
-            session_start();
             if (isset($_SESSION['username'])) {
                 echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
             }
@@ -149,11 +187,15 @@
 
             <section class="section-contact">
                 <div class="container">
-                    <form action="" class="form-controler">
+                    <form action="Category.php" method="post" class="form-controler">
                         <div class="form-group mt-2 d-flex">
-                            <input type="text" placeholder="ID" class="form-control">
-                            <input type="email" placeholder="Name" class="form-control">
-                            <input type="email" placeholder="Description" class="form-control">
+                            <input type="text" name="name"placeholder="Name" class="form-control"required>
+                            <input type="text" name="description" placeholder="Description" class="form-control" required>
+                            <input type="submit" name="submit" id="addProductbtn" value="Submit">
+                            <label class="label5" for="addProductbtn">
+                                <i class="fa fa-plus-square-o" aria-hidden="true"></i>
+                                Add Category
+                            </label>
                         </div>
                     </form>
                 </div>
@@ -172,6 +214,30 @@
                     <tbody>
                     <?php
                     include ("php/config.php");
+                    if (isset($_GET['id'])) {
+                        // Sanitize the 'id' parameter to prevent SQL injection
+                        $id = intval($_GET['id']);
+
+                        // Prepare SQL statement to delete the row with the specified id
+                        $sql = "DELETE FROM category WHERE id = ?";
+
+                        // Prepare the statement
+                        $stmt = $conn->prepare($sql);
+
+                        // Bind the parameter
+                        $stmt->bind_param("i", $id);
+
+                        // Execute the statement
+                        if ($stmt->execute()) {
+                            echo "Category deleted successfully.";
+                        } else {
+                            echo "Error deleting record: " . $conn->error;
+                        }
+
+                        // Close the statement
+                        $stmt->close();
+                    }
+
                     $sql = "SELECT * FROM category";
 
                     $result = $conn->query($sql);
@@ -185,8 +251,12 @@
                             echo "<td>" . $row["description"] . "</td>";
                             echo '<td>
                                     <div class="actions">
+                                        <a href="Category.php?id=' . $row["id"] . '">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="Category.php?id=' . $row["id"] . '">
                                         <i class="fa fa-pencil" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                    </td>';
                             echo "</tr>";

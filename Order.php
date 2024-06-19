@@ -26,7 +26,8 @@
             margin: 0 auto .5rem auto;
             background-color: white;
         }
-        .page-header{
+
+        .page-header {
             background-color: hsl(0, 0%, 9%);;
         }
     </style>
@@ -57,26 +58,26 @@
         <div class="side-menu">
             <ul>
                 <li>
-                    <a href="Dashboard.php" >
+                    <a href="Dashboard.php">
                         <span class="las la-home"></span>
                         <small>Dashboard</small>
                     </a>
                 </li>
                 <li>
                     <a href="Products.php">
-                        <span ><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
                 </li>
                 <li>
                     <a href="Category.php">
-                        <span ><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>
                 </li>
                 <li>
                     <a href="Customers.php">
-                        <span ><i class="fa fa-users" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>
                 </li>
@@ -139,8 +140,14 @@
 
             <section class="section-contact">
                 <div class="container">
-                    <form action="" class="form-controler">
-                        <input type="text" placeholder="Search" class="form-control"style="width: 35%">
+                    <form method="post" action="Order.php" class="form-controler">
+                        <input type="text" placeholder="Search" name="search_id" class="form-control"
+                               style="width: 35%">
+                        <input type="submit" name="submit" id="addProductbtn" value="Submit">
+                        <label class="label5" for="addProductbtn" style="width: 35%; margin-left:10px ">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Search
+                        </label>
                     </form>
                 </div>
             </section>
@@ -157,8 +164,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                        <?php
-                            include ("php/config.php");
+                    <?php
+                    include("php/config.php");
+                    if (isset($_POST['submit'])) {
+                        $search_id = $_POST['search_id'];
+
+                        $sql = "SELECT * FROM orders WHERE id = '$search_id'";
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            // Output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["usr_id"] . "</td>";
+                                echo "<td>" . $row["is_complete"] . "</td>";
+                                echo "<td>" . $row["date_order"] . "</td>";
+                                echo "<td>" . $row["address"] . "</td>";
+                                // Add more columns as needed
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>0 results</td></tr>";
+                        }
+                    } else {
                         $sql = "SELECT * FROM orders";
 
                         $result = $conn->query($sql);
@@ -178,10 +207,10 @@
                         } else {
                             echo "0 results";
                         }
-
-                        // Close the connection
-                        $conn->close();
-                        ?>
+                    }
+                    // Close the connection
+                    $conn->close();
+                    ?>
                     </tbody>
                 </table>
             </div>

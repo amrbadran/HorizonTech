@@ -26,7 +26,8 @@
             margin: 0 auto .5rem auto;
             background-color: white;
         }
-        .page-header{
+
+        .page-header {
             background-color: hsl(0, 0%, 9%);;
         }
     </style>
@@ -64,19 +65,19 @@
                 </li>
                 <li>
                     <a href="Products.php">
-                        <span ><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-product-hunt" aria-hidden="true"></i></span>
                         <small>Products</small>
                     </a>
                 </li>
                 <li>
                     <a href="Category.php">
-                        <span ><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-keyboard-o" aria-hidden="true"></i></span>
                         <small>Categories</small>
                     </a>
                 </li>
                 <li>
                     <a href="Customers.php" class="active">
-                        <span ><i class="fa fa-users" aria-hidden="true"></i></span>
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
                         <small>Customers</small>
                     </a>
                 </li>
@@ -140,8 +141,13 @@
 
             <section class="section-contact">
                 <div class="container">
-                    <form action="" class="form-controler">
-                        <input type="text" placeholder="Search" class="form-control"style="width: 35%">
+                    <form method="post" action="Customers.php" class="form-controler">
+                        <input type="text" name="search_id" placeholder="Search" class="form-control" style="width: 35%">
+                        <input type="submit" name="submit" id="addProductbtn" value="Submit">
+                        <label class="label5" for="addProductbtn" style="width: 35%; margin-left:10px ">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            Search
+                        </label>
                     </form>
                 </div>
             </section>
@@ -161,26 +167,50 @@
                     </thead>
                     <tbody>
                     <?php
-                    include ("php/config.php");
-                    $sql = "SELECT * FROM users";
+                    include("php/config.php");
+                    if (isset($_POST['submit'])) {
+                        $search_id = $_POST['search_id'];
 
-                    $result = $conn->query($sql);
+                        $sql = "SELECT * FROM users WHERE username = '$search_id' AND role = 'u'";
+                        $result = $conn->query($sql);
 
-                    if ($result->num_rows > 0) {
-
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<tr>";
-                            echo "<td>" . $row["id"] . "</td>";
-                            echo "<td>" . $row["username"] . "</td>";
-                            echo "<td>" . $row["password"] . "</td>";
-                            echo "<td>" . $row["first_name"] . "</td>";
-                            echo "<td>" . $row["last_name"] . "</td>";
-                            echo "<td>" . $row["address"] . "</td>";
-                            echo "<td>" . $row["role"] . "</td>";
-                            echo "</tr>";
+                        if ($result->num_rows > 0) {
+                            // Output data of each row
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["username"] . "</td>";
+                                echo "<td>" . $row["password"] . "</td>";
+                                echo "<td>" . $row["first_name"] . "</td>";
+                                echo "<td>" . $row["last_name"] . "</td>";
+                                echo "<td>" . $row["address"] . "</td>";
+                                echo "<td>" . $row["role"] . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "<tr><td colspan='5'>0 results</td></tr>";
                         }
                     } else {
-                        echo "0 results";
+                        $sql = "SELECT * FROM users";
+
+                        $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+
+                            while ($row = $result->fetch_assoc()) {
+                                echo "<tr>";
+                                echo "<td>" . $row["id"] . "</td>";
+                                echo "<td>" . $row["username"] . "</td>";
+                                echo "<td>" . $row["password"] . "</td>";
+                                echo "<td>" . $row["first_name"] . "</td>";
+                                echo "<td>" . $row["last_name"] . "</td>";
+                                echo "<td>" . $row["address"] . "</td>";
+                                echo "<td>" . $row["role"] . "</td>";
+                                echo "</tr>";
+                            }
+                        } else {
+                            echo "0 results";
+                        }
                     }
                     $conn->close();
                     ?>
