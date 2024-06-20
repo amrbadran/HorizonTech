@@ -180,7 +180,7 @@ if (isset($_POST['submit'])) {
 
         <div class="page-header">
             <h1>Dashboard</h1>
-            <small>Home / Dashboard</small>
+            <small>Home / Category</small>
         </div>
 
         <div class="page-content">

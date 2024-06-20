@@ -133,7 +133,7 @@
 
         <div class="page-header">
             <h1>Dashboard</h1>
-            <small>Home / Customers</small>
+            <small>Home / Orders</small>
         </div>
 
         <div class="page-content">
