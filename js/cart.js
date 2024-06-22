@@ -16,6 +16,7 @@ function getSubPrice(){
 console.log(localStorage.getItem('shopping_cart'));
 console.log(111);
 let s = getSubPrice();
+console.log(s);
 function countProductCart(id){
     let carts = JSON.parse(localStorage.getItem('shopping_cart'));
     let res = -1;
@@ -25,7 +26,7 @@ function countProductCart(id){
     return res;
 }
 productsInCart.forEach((e) => {
-    s += (+e.price.slice(0, e.price.length - 1)) * Number(localStorage.getItem('productQuantityCart' + e.id));
+    //s += (+e.price.slice(0, e.price.length - 1)) * Number(localStorage.getItem('productQuantityCart' + e.id));
     let quan = countProductCart(e.id);
     $('#containerProducts').prepend(`
             <div class="product-in-cart d-lg-flex w-100 position-relative">

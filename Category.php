@@ -1,5 +1,17 @@
 <?php
 session_start();
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    if ($username != "admin") {
+        header("Location: index.php");
+    }
+
+}
+
+?>
+<?php
+
 include("php/config.php");
 
 // Function to validate input

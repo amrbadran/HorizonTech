@@ -1,11 +1,11 @@
 <?php
 session_start();
-$username = $_SESSION['username'];
-if (isset($username)) {
-    if ($username == "adminTest") {
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    if ($username == "admin") {
         header("Location: Dashboard.php");
     } else {
-
         header("Location: index.php");
     }
     exit();
@@ -23,7 +23,7 @@ if (isset($username)) {
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="./css/font-awesome.css">
 
-    <title>Document</title>
+    <title>Login</title>
 </head>
 <body>
 

@@ -1,3 +1,16 @@
+
+<?php
+session_start();
+
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+    if ($username != "admin") {
+        header("Location: index.php");
+    }
+
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -47,7 +60,7 @@
                 <img src="images/corporate-user-icon.png" alt="User Icon">
             </div>
             <?php
-            session_start();
+
             if (isset($_SESSION['username'])) {
                 echo "<h4>" . htmlspecialchars($_SESSION['username']) . "</h4>";
             }
