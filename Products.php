@@ -279,7 +279,7 @@ function validateInput($value, $type, $fieldName, $allowNull = false)
 
         <div class="page-header">
             <h1>Dashboard</h1>
-            <small>Home / Dashboard</small>
+            <small>Home / Products</small>
         </div>
 
         <div class="page-content">
